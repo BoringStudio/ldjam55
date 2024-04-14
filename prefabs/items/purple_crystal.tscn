@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://b30rtw4jcayoy"]
+
+[ext_resource type="Script" path="res://scripts/room/RoomItem.cs" id="1_1lwmy"]
+[ext_resource type="Texture2D" uid="uid://c45pknhgbnst4" path="res://textures/items/crystal_purple.png" id="1_8gsho"]
+[ext_resource type="Texture2D" uid="uid://cge6w3vactb3q" path="res://textures/fx/purple_crystal_shadow.png" id="1_esrtj"]
+[ext_resource type="PackedScene" uid="uid://d3qctkcd3hcba" path="res://prefabs/rays/ray_purple.tscn" id="4_pgp04"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7hpwi"]
+height = 0.2
+radius = 0.12
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0aefi"]
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0.8, 0.647059, 0.972549, 1)
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_f0wu5"]
+material = SubResource("StandardMaterial3D_0aefi")
+size = Vector2(0.01, 0.01)
+
+[node name="crystal" type="Node3D" node_paths=PackedStringArray("RotationTarget")]
+script = ExtResource("1_1lwmy")
+RotationTarget = NodePath("ray")
+AngleSnap = 90.0
+
+[node name="body" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("CylinderShape3D_7hpwi")
+
+[node name="shadow" type="Sprite3D" parent="."]
+transform = Transform3D(1.12615, 0, 0, 0, -3.65727e-08, 1, 0, -0.836685, -4.37114e-08, 0, 0, 0)
+sorting_offset = -1.0
+cast_shadow = 0
+gi_mode = 0
+pixel_size = 0.003
+texture = ExtResource("1_esrtj")
+
+[node name="crystal" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.78043, 0.625243, 0, -0.625243, 0.78043, 0, 0.0872184, -0.0626938)
+sorting_offset = 1.0
+cast_shadow = 0
+gi_mode = 0
+pixel_size = 0.0005
+texture = ExtResource("1_8gsho")
+
+[node name="particles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175918, 0)
+cast_shadow = 0
+gi_mode = 0
+amount = 15
+lifetime_randomness = 0.03
+mesh = SubResource("QuadMesh_f0wu5")
+emission_shape = 1
+emission_sphere_radius = 0.2
+gravity = Vector3(0, 0.1, 0)
+
+[node name="ray" parent="." node_paths=PackedStringArray("Crystal") instance=ExtResource("4_pgp04")]
+Crystal = NodePath("../body")

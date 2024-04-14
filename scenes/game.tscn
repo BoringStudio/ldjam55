@@ -1,0 +1,280 @@
+[gd_scene load_steps=24 format=3 uid="uid://c7guiqvhdmjsu"]
+
+[ext_resource type="Script" path="res://scripts/Game.cs" id="1_uc7et"]
+[ext_resource type="Script" path="res://scripts/ui/ForceWindowAspect.cs" id="2_uk7lg"]
+[ext_resource type="PackedScene" uid="uid://c8ltkgk4of5g" path="res://prefabs/inventory_item.tscn" id="3_dwvwn"]
+[ext_resource type="Script" path="res://scripts/Inventory.cs" id="3_kj427"]
+[ext_resource type="Texture2D" uid="uid://b6u8w6env0y2r" path="res://textures/ui/patern.png" id="3_nkgwj"]
+[ext_resource type="Resource" uid="uid://d1fbehf3ysehk" path="res://items/crystals/blue_crystal.tres" id="4_2himg"]
+[ext_resource type="Texture2D" uid="uid://dfmmtetisyyfw" path="res://textures/ui/book.png" id="4_4w1lm"]
+[ext_resource type="PackedScene" uid="uid://cl5eskwaaf5mj" path="res://prefabs/room.tscn" id="4_a3vi0"]
+[ext_resource type="Theme" uid="uid://cmw6buwn7cjqw" path="res://theme.tres" id="4_msmoe"]
+[ext_resource type="Resource" uid="uid://bfr3n747jb8rx" path="res://items/crystals/green_crystal.tres" id="5_bebhw"]
+[ext_resource type="Resource" uid="uid://cp4qyfnhkjpm" path="res://items/quest/boots.tres" id="6_2vjsh"]
+[ext_resource type="PackedScene" uid="uid://bpdnflnh0b7io" path="res://prefabs/inventory_ui.tscn" id="7_iojk6"]
+[ext_resource type="Resource" uid="uid://d4bhlmesxi2ci" path="res://items/quest/feather.tres" id="7_qslus"]
+[ext_resource type="Texture2D" uid="uid://xo47w0hx132j" path="res://textures/ui/room_background.png" id="8_ctnqd"]
+[ext_resource type="Resource" uid="uid://ctex6vnuph727" path="res://items/quest/gold.tres" id="8_t4okx"]
+[ext_resource type="Resource" uid="uid://fhl0ky2x45vo" path="res://items/crystals/purple_crystal.tres" id="9_gsl15"]
+[ext_resource type="Texture2D" uid="uid://b7bp86dwi1qhn" path="res://textures/ui/book_arrow.png" id="11_pyagv"]
+[ext_resource type="Texture2D" uid="uid://ixq1hwrrqce3" path="res://textures/monsters/donkey_print.png" id="13_bvh2i"]
+[ext_resource type="FontFile" uid="uid://bnk7pq7rtseu1" path="res://fonts/font_book.otf" id="13_jaq5h"]
+[ext_resource type="Texture2D" uid="uid://dgwdvrduo2pws" path="res://textures/ui/border_small.png" id="13_lnxmd"]
+[ext_resource type="Texture2D" uid="uid://bb58wyknhge23" path="res://textures/diagrams/donkey_diagram.png" id="15_5jgyp"]
+[ext_resource type="Script" path="res://scripts/ui/RoomViewport.cs" id="22_7p3vq"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ndo7s"]
+viewport_path = NodePath("room_world")
+
+[node name="game" type="Node2D" node_paths=PackedStringArray("Room", "Inventory")]
+position = Vector2(-1, 0)
+script = ExtResource("1_uc7et")
+Room = NodePath("room_world/room")
+Inventory = NodePath("inventory")
+
+[node name="force_window_aspect" type="Node" parent="."]
+script = ExtResource("2_uk7lg")
+
+[node name="inventory" type="Node" parent="."]
+script = ExtResource("3_kj427")
+Balance = 100
+InitialItems = Array[Object]([ExtResource("4_2himg"), ExtResource("5_bebhw"), ExtResource("6_2vjsh"), ExtResource("7_qslus"), ExtResource("8_t4okx"), ExtResource("9_gsl15")])
+
+[node name="room_world" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+use_debanding = true
+size = Vector2i(2048, 2048)
+render_target_update_mode = 4
+
+[node name="room" parent="room_world" node_paths=PackedStringArray("RenderTarget") instance=ExtResource("4_a3vi0")]
+RenderTarget = NodePath("../../main_canvas/container/home_right/room_viewport")
+
+[node name="main_canvas" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="main_canvas"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_nkgwj")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="container" type="HBoxContainer" parent="main_canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_msmoe")
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="main_canvas/container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("13_lnxmd")
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="main_canvas/container/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="home_left" type="VBoxContainer" parent="main_canvas/container/NinePatchRect/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_msmoe")
+
+[node name="book_container" type="VBoxContainer" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_msmoe")
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="left_space" type="Control" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="book" type="TextureRect" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_msmoe")
+texture = ExtResource("4_4w1lm")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 20.0
+offset_right = -10.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="top_space" type="Control" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("13_bvh2i")
+expand_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Control" type="Control" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer/HBoxContainer/MarginContainer/Control"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 141.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.403922, 0.360784, 0.337255, 1)
+theme_override_fonts/font = ExtResource("13_jaq5h")
+text = "   Tomas
+
+A strange donkey who at one time walked half the world. 
+However, he never reached the end of the journey because he had worn out all his shoes.
+"
+vertical_alignment = 3
+autowrap_mode = 2
+justification_flags = 171
+
+[node name="TextureRect" type="TextureRect" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer/HBoxContainer/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -116.0
+offset_top = -23.0
+offset_right = -19.0
+offset_bottom = 73.0
+grow_horizontal = 0
+texture = ExtResource("15_5jgyp")
+expand_mode = 1
+
+[node name="bottom_space" type="Control" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="right_space" type="Control" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="right_container" type="HBoxContainer" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container"]
+layout_mode = 2
+theme = ExtResource("4_msmoe")
+alignment = 1
+
+[node name="button_book_left" type="Button" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/right_container"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme = ExtResource("4_msmoe")
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/right_container/button_book_left"]
+layout_mode = 0
+offset_left = -12.0
+offset_right = 116.0
+offset_bottom = 64.0
+texture = ExtResource("11_pyagv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="button_book_right" type="Button" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/right_container"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme = ExtResource("4_msmoe")
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/right_container/button_book_right"]
+layout_mode = 0
+offset_left = -12.0
+offset_right = 116.0
+offset_bottom = 64.0
+texture = ExtResource("11_pyagv")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="inventory_ui" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left" node_paths=PackedStringArray("Inventory") instance=ExtResource("7_iojk6")]
+layout_mode = 2
+size_flags_vertical = 3
+Inventory = NodePath("../../../../../../inventory")
+InventoryItemScene = ExtResource("3_dwvwn")
+
+[node name="home_right" type="Control" parent="main_canvas/container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_msmoe")
+
+[node name="root_background" type="TextureRect" parent="main_canvas/container/home_right"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_ctnqd")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="room_viewport" type="TextureRect" parent="main_canvas/container/home_right" node_paths=PackedStringArray("Viewport")]
+visibility_layer = 3
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = SubResource("ViewportTexture_ndo7s")
+expand_mode = 1
+stretch_mode = 6
+script = ExtResource("22_7p3vq")
+Viewport = NodePath("../../../../room_world/room")

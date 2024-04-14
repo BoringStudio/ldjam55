@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Crystal" load_steps=4 format=3 uid="uid://fhl0ky2x45vo"]
+
+[ext_resource type="Texture2D" uid="uid://c45pknhgbnst4" path="res://textures/items/crystal_purple.png" id="1_7i11s"]
+[ext_resource type="PackedScene" uid="uid://b30rtw4jcayoy" path="res://prefabs/items/purple_crystal.tscn" id="1_76mbv"]
+[ext_resource type="Script" path="res://scripts/resources/Crystal.cs" id="1_gkxr4"]
+
+[resource]
+script = ExtResource("1_gkxr4")
+Directions = 2
+GlobalId = 1002
+Name = "Purple Crystal"
+Texture = ExtResource("1_7i11s")
+RoomItem = ExtResource("1_76mbv")

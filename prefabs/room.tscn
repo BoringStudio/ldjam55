@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl5eskwaaf5mj"]
+
+[ext_resource type="Script" path="res://scripts/room/Room.cs" id="1_a1o5u"]
+[ext_resource type="Environment" uid="uid://bfb6td7o7va37" path="res://room_env.tres" id="4_tm6k3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2sja0"]
+
+[node name="room" type="Node3D"]
+script = ExtResource("1_a1o5u")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_tm6k3")
+
+[node name="camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.780507, 0.625147, 0, -0.625147, 0.780507, 0, 1.6337, 1.59716)
+keep_aspect = 0
+far = 100.0
+
+[node name="summoning_area" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_2sja0")
+skeleton = NodePath("../..")

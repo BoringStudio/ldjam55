@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Crystal" load_steps=4 format=3 uid="uid://d1fbehf3ysehk"]
+
+[ext_resource type="PackedScene" uid="uid://6adu3fofguwd" path="res://prefabs/items/blue_crystal.tscn" id="1_353td"]
+[ext_resource type="Script" path="res://scripts/resources/Crystal.cs" id="1_an065"]
+[ext_resource type="Texture2D" uid="uid://dwxjkdyx0eots" path="res://textures/items/crystal_blue.png" id="1_h5vpk"]
+
+[resource]
+script = ExtResource("1_an065")
+Directions = 0
+GlobalId = 1000
+Name = "Green Crystal"
+Texture = ExtResource("1_h5vpk")
+RoomItem = ExtResource("1_353td")

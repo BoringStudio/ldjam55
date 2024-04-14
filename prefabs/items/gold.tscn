@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd3rcctgd4h7a"]
+
+[ext_resource type="Script" path="res://scripts/room/RoomItem.cs" id="1_1qu44"]
+[ext_resource type="Texture2D" uid="uid://byse16xe5jfa6" path="res://textures/fx/round_shadow.png" id="2_wal84"]
+[ext_resource type="Texture2D" uid="uid://du7bk6t4tm5kw" path="res://textures/items/gold.png" id="3_n3ufh"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jod05"]
+height = 0.2
+radius = 0.12
+
+[node name="gold" type="Node3D"]
+script = ExtResource("1_1qu44")
+
+[node name="body" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("CylinderShape3D_jod05")
+
+[node name="shadow" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.00611231, 0)
+pixel_size = 0.002
+texture = ExtResource("2_wal84")
+
+[node name="sprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.78043, 0.625243, 0, -0.625243, 0.78043, 0, 0.0707384, -0.0358946)
+cast_shadow = 0
+gi_mode = 0
+pixel_size = 0.0007
+texture = ExtResource("3_n3ufh")
