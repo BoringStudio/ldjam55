@@ -18,6 +18,19 @@ public partial class CrystalRay : Node3D
 
     private float _shift;
 
+    public int Angle
+    {
+        get
+        {
+            var globalRotation = GlobalRotation.Y;
+            if (globalRotation < 0.0f && Mathf.Abs(globalRotation) + 0.0001f >= Mathf.Pi)
+                globalRotation += 2 * Mathf.Pi;
+
+            var degrees = Mathf.RoundToInt(Mathf.RadToDeg(globalRotation) / 15.0f) * 15;
+            return degrees;
+        }
+    }
+
     public override void _Ready()
     {
         _sprite = GetNode<Sprite3D>("sprite");

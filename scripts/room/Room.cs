@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
+using Godot.Collections;
 using ldjam55.scripts.resources;
 using ldjam55.scripts.ui;
 
@@ -200,51 +202,213 @@ public partial class Room : Node3D
     {
         var children = GetChildren();
 
-        var visited = new HashSet<int>();
-        var stack = new Stack<RoomItem>();
+        var visited = new System.Collections.Generic.Dictionary<int, GraphNode>();
+        var stack = new Stack<(RoomItem, GraphNode, int)>();
 
-        RoomItem start = null;
+        GraphNode start = null;
         foreach (var child in children)
         {
             if (child is not RoomItem roomItem) continue;
-            if (visited.Contains(roomItem.GetIndex())) continue;
 
             stack.Clear();
-            stack.Push(roomItem);
+            stack.Push((roomItem, null, 0));
 
             while (stack.Count > 0)
             {
-                var last = stack.Pop();
-                var lastIndex = last.GetIndex();
+                var (last, lastParent, lastParentAngle) = stack.Pop();
+                var index = last.GetIndex();
 
-                if (!visited.Add(lastIndex)) continue;
 
-                switch (roomItem.Item)
+                GraphNode node;
+                if (visited.TryGetValue(index, out var existing))
                 {
-                    case Crystal crystal:
+                    node = existing;
+                }
+                else
+                {
+                    switch (last.Item)
                     {
-                        GD.Print("Found crystal: ", crystal.Name);
-
-                        if (crystal.Directions == CrystalDirections.I)
+                        case Crystal crystal:
                         {
-                            start = roomItem;
-                        }
+                            var edge = new GraphNode
+                            {
+                                Index = index,
+                                Item = crystal,
+                                Links = new()
+                            };
 
-                        foreach (var ray in roomItem.Rays)
-                        {
-                            if (ray.ClosestNode is not RoomItem nextNode) continue;
-                            stack.Push(nextNode);
-                        }
+                            if (crystal.Directions == CrystalDirections.I)
+                            {
+                                start = edge;
+                            }
 
-                        break;
+                            foreach (var ray in last.Rays)
+                            {
+                                if (ray.ClosestNode?.GetParent() is not RoomItem linkedItem) continue;
+                                var nextIndex = linkedItem.GetIndex();
+
+                                if (visited.TryGetValue(nextIndex, out var nextNode))
+                                {
+                                    edge.AddLink(ray.Angle, nextNode);
+                                    nextNode.AddLink(InvertAngle(ray.Angle), edge);
+                                }
+                                else
+                                {
+                                    stack.Push((linkedItem, edge, ray.Angle));
+                                }
+                            }
+
+                            node = edge;
+                            break;
+                        }
+                        case QuestItem item:
+                            node = new GraphNode
+                            {
+                                Index = index,
+                                Item = item,
+                                Links = new()
+                            };
+                            break;
+                        default:
+                            continue;
                     }
-                    case QuestItem item:
-                        GD.Print("Found item: ", item.Name);
-                        break;
+
+                    visited.Add(index, node);
+                }
+
+                if (lastParent != null)
+                {
+                    node.AddLink(InvertAngle(lastParentAngle), lastParent);
+                    lastParent.AddLink(lastParentAngle, node);
                 }
             }
         }
 
-        GD.Print("Found start", start);
+        if (start != null)
+        {
+            start.Normalize();
+            start.Print();
+
+            foreach (var monster in Game.AllMonsters)
+            {
+                if (start.Compare(monster.Diagram))
+                {
+                    GD.Print("FOUND: ", monster.Name);
+                }
+            }
+        }
+    }
+
+    private int InvertAngle(int angle)
+    {
+        angle = (angle + 180) % 360;
+        if (angle > 180)
+            angle -= 360;
+        return angle;
+    }
+}
+
+internal class GraphNode
+{
+    public int Index;
+    public Item Item;
+    public List<(int, GraphNode)> Links;
+
+    public void Print()
+    {
+        var visited = new HashSet<int>();
+        var queue = new Stack<(GraphNode, GraphNode, int)>();
+
+        var n = 0;
+
+        queue.Push((this, null, 0));
+        while (queue.Count > 0)
+        {
+            var (last, prev, lastAngle) = queue.Pop();
+            if (!visited.Add(last.Index)) continue;
+
+            if (prev != null)
+            {
+                GD.Print("#[", n, ", ", last.Item.Name.PadLeft(16), "]:\t", last.Item.GlobalId, ", ", lastAngle);
+                n += 1;
+            }
+
+            if (last.Links.Count == 0) continue;
+            for (var i = last.Links.Count - 1; i >= 0; i--)
+            {
+                var (angle, next) = last.Links[i];
+                if (visited.Contains(next.Index)) continue;
+                queue.Push((next, last, angle));
+            }
+        }
+    }
+
+    public bool Compare(Array<Vector2I> items)
+    {
+        var visited = new HashSet<int>();
+        var queue = new Stack<(GraphNode, GraphNode, int)>();
+
+        var pos = 0;
+
+        queue.Push((this, null, 0));
+        while (queue.Count > 0)
+        {
+            var (last, prev, lastAngle) = queue.Pop();
+            if (!visited.Add(last.Index)) continue;
+
+            if (pos >= items.Count)
+            {
+                GD.Print("Too many");
+                return false;
+            }
+
+            if (prev != null)
+            {
+                GD.Print("Node", prev.Index, " -> Node", last.Index, "[label=\"", lastAngle, "\", id=\"",
+                    last.Item.GlobalId, "\"]");
+
+                var (expectedId, expectedAngle) = items[pos];
+                if (last.Item.GlobalId != expectedId || expectedAngle != lastAngle) return false;
+                pos += 1;
+            }
+
+            if (last.Links.Count == 0) continue;
+            for (var i = last.Links.Count - 1; i >= 0; i--)
+            {
+                var (angle, next) = last.Links[i];
+                if (visited.Contains(next.Index)) continue;
+                queue.Push((next, last, angle));
+            }
+        }
+
+        return pos == items.Count;
+    }
+
+    public bool AddLink(int angle, GraphNode node)
+    {
+        if (Links.Any(item => item.Item2.Index == node.Index)) return false;
+        Links.Add((angle, node));
+        return true;
+    }
+
+    public void Normalize()
+    {
+        var visited = new HashSet<int>();
+        var stack = new Queue<GraphNode>();
+
+        stack.Enqueue(this);
+        while (stack.Count > 0)
+        {
+            var last = stack.Dequeue();
+            if (!visited.Add(last.Index)) continue;
+
+            last.Links.Sort((left, right) => left.Item1.CompareTo(right.Item1));
+
+            foreach (var (_, next) in last.Links)
+            {
+                if (visited.Contains(next.Index)) continue;
+                stack.Enqueue(next);
+            }
+        }
     }
 }

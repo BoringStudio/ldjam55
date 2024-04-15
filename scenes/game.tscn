@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://c7guiqvhdmjsu"]
+[gd_scene load_steps=25 format=3 uid="uid://c7guiqvhdmjsu"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_uc7et"]
+[ext_resource type="Resource" uid="uid://ktmoujvyaf2e" path="res://items/monsters/donkey.tres" id="2_56jnr"]
 [ext_resource type="Script" path="res://scripts/ui/ForceWindowAspect.cs" id="2_uk7lg"]
 [ext_resource type="PackedScene" uid="uid://c8ltkgk4of5g" path="res://prefabs/inventory_item.tscn" id="3_dwvwn"]
 [ext_resource type="Script" path="res://scripts/Inventory.cs" id="3_kj427"]
@@ -31,6 +32,7 @@ position = Vector2(-1, 0)
 script = ExtResource("1_uc7et")
 Room = NodePath("room_world/room")
 Inventory = NodePath("inventory")
+AllMonsters = Array[Object]([ExtResource("2_56jnr")])
 
 [node name="force_window_aspect" type="Node" parent="."]
 script = ExtResource("2_uk7lg")

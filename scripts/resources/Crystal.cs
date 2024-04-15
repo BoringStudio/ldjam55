@@ -13,5 +13,4 @@ public enum CrystalDirections
     X,
     Y,
     I,
-    O,
 }
