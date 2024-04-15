@@ -11,4 +11,5 @@ Name = "Dragon"
 Description = ""
 BookImage = ExtResource("1_4xyeh")
 RealImage = ExtResource("2_gi7fp")
+GivesItems = null
 Diagram = Array[Vector2i]([Vector2i(1000, 0), Vector2i(2, -135), Vector2i(1001, -105), Vector2i(4, -165), Vector2i(4, -45), Vector2i(2, -45), Vector2i(1001, 0), Vector2i(13, -60), Vector2i(13, 60), Vector2i(2, 45), Vector2i(1001, 105), Vector2i(4, 45), Vector2i(4, 165), Vector2i(2, 135)])

@@ -11,4 +11,5 @@ Name = "Loch Ness"
 Description = ""
 BookImage = ExtResource("1_lo056")
 RealImage = ExtResource("2_w0fa1")
+GivesItems = null
 Diagram = Array[Vector2i]([Vector2i(2, 90), Vector2i(1001, -150), Vector2i(8, -90), Vector2i(8, 150), Vector2i(1001, -30), Vector2i(8, -90), Vector2i(8, 30), Vector2i(1000, 90), Vector2i(3, 0), Vector2i(3, 90), Vector2i(3, 180)])

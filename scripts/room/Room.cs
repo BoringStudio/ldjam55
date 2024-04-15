@@ -12,11 +12,13 @@ public partial class Room : Node3D
 {
     [Export] public Game Game;
     [Export] public PackedScene QuestItem;
+    [Export] public PackedScene SummonedMonsterScene;
 
     [Export] public Control RenderTarget;
     [Export] public Vector2 SummoningAreaSize = Vector2.One * 2.0f;
 
     public Node3D GrabbedObject;
+    public SummonedMonster SummonedMonster;
 
     private Window _window;
     private Camera3D _camera;
@@ -214,10 +216,10 @@ public partial class Room : Node3D
 
     private void ClearSummoningArea()
     {
-        GrabbedObject = null;
-
         foreach (var child in _summoningArea.GetChildren())
         {
+            if (child == GrabbedObject) continue;
+
             _summoningArea.RemoveChild(child);
             child.QueueFree();
         }
@@ -318,11 +320,26 @@ public partial class Room : Node3D
             {
                 if (start.Compare(monster.Diagram))
                 {
-                    Game.SummonMonster(monster);
+                    SpawnMonster(monster);
                     return;
                 }
             }
         }
+    }
+
+    private void SpawnMonster(Monster monster)
+    {
+        SummonedMonster = (SummonedMonster)SummonedMonsterScene.Instantiate();
+        SummonedMonster.Monster = monster;
+        SummonedMonster.AnimationFinished += OnMonsterSpawned;
+        AddChild(SummonedMonster);
+
+        Game.SummonMonster(monster);
+    }
+
+    private void OnMonsterSpawned()
+    {
+        ClearSummoningArea();
     }
 
     private void OnNewMonster(Monster monster)
