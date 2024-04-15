@@ -72,6 +72,8 @@ public partial class Room : Node3D
 
     public override void _UnhandledInput(InputEvent @event)
     {
+        if (!Game.IsRunning) return;
+
         if (@event.IsActionPressed("summon"))
         {
             GD.Print("Try Summon");

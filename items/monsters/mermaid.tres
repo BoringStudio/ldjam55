@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="Monster" load_steps=6 format=3 uid="uid://bdwj6xexe50ue"]
+[gd_resource type="Resource" script_class="Monster" load_steps=5 format=3 uid="uid://bdwj6xexe50ue"]
 
 [ext_resource type="Script" path="res://scripts/resources/Monster.cs" id="1_bo60m"]
-[ext_resource type="Texture2D" uid="uid://undu71wcyhv6" path="res://textures/monsters/mermaid_print.png" id="1_v7yr7"]
 [ext_resource type="Texture2D" uid="uid://clcqs4r4g0en3" path="res://textures/monsters/mermaid.png" id="2_01ai8"]
 [ext_resource type="Resource" uid="uid://b2ug13u8ehdbw" path="res://items/quest/mirror.tres" id="2_mxt5w"]
 [ext_resource type="Resource" uid="uid://bwatfpiximxs3" path="res://items/quest/fish.tres" id="3_u0bwj"]
@@ -10,8 +9,6 @@
 script = ExtResource("1_bo60m")
 MonsterId = 4
 Name = "Mermaid"
-Description = ""
-BookImage = ExtResource("1_v7yr7")
 RealImage = ExtResource("2_01ai8")
 GivesItems = Array[Object]([ExtResource("2_mxt5w"), ExtResource("3_u0bwj")])
 Diagram = Array[Vector2i]([Vector2i(1000, -90), Vector2i(8, -135), Vector2i(8, -45), Vector2i(1001, 0), Vector2i(2, -60), Vector2i(2, 60), Vector2i(8, 45), Vector2i(8, 135), Vector2i(1001, 180), Vector2i(9, -120), Vector2i(9, 120)])

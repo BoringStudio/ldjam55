@@ -3,25 +3,26 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ck1bpwjln2ltu"
-path="res://.godot/imported/book_page_5.png-9aee9a4f638cd0743f670b2dd3f027f1.ctex"
+path.s3tc="res://.godot/imported/book_page_5.png-9aee9a4f638cd0743f670b2dd3f027f1.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/book/book_page_5.png"
-dest_files=["res://.godot/imported/book_page_5.png-9aee9a4f638cd0743f670b2dd3f027f1.ctex"]
+dest_files=["res://.godot/imported/book_page_5.png-9aee9a4f638cd0743f670b2dd3f027f1.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

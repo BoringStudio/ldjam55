@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Godot;
 using Godot.Collections;
 using ldjam55.scripts.room;
+using ldjam55.scripts.ui;
 
 namespace ldjam55.scripts;
 
@@ -14,8 +15,11 @@ public partial class Game : Node
 
     [Export] public Array<resources.Monster> AllMonsters;
 
+    [Export] public Intro Intro;
+    [Export] public CanvasLayer MainScene;
     [Export] public Array<AudioStream> Music;
 
+    public bool IsRunning;
 
     private readonly HashSet<int> _summonedMonsters = new();
     private int _currentMusic;
@@ -36,6 +40,11 @@ public partial class Game : Node
             AudioPlayer.Play();
             AudioPlayer.Finished += SetNextMusic;
         }
+
+        MainScene.Visible = false;
+        Intro.Visible = true;
+
+        Intro.Finished += OnIntroFinished;
     }
 
     public override void _Process(double delta)
@@ -62,5 +71,14 @@ public partial class Game : Node
         _currentMusic = (_currentMusic + 1) % Music.Count;
         AudioPlayer.Stream = Music[_currentMusic];
         AudioPlayer.Play();
+    }
+
+    private void OnIntroFinished()
+    {
+        RemoveChild(Intro);
+        Intro.QueueFree();
+
+        MainScene.Visible = true;
+        IsRunning = true;
     }
 }
