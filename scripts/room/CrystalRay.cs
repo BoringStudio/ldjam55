@@ -52,10 +52,17 @@ public partial class CrystalRay : Node3D
         var spriteScale = 1.0f;
         if (ClosestNode != null)
         {
-            var distanceSquared = ClosestNode.GlobalPosition.DistanceSquaredTo(GlobalPosition);
-            spriteScale = Mathf.Clamp(distanceSquared / _spriteLengthSquared, 0.0f, 1.0f);
+            if (ClosestNode.IsInsideTree())
+            {
+                var distanceSquared = ClosestNode.GlobalPosition.DistanceSquaredTo(GlobalPosition);
+                spriteScale = Mathf.Clamp(distanceSquared / _spriteLengthSquared, 0.0f, 1.0f);
 
-            _shift = (float)(_shift + delta * RaySpeed) % 1.0f;
+                _shift = (float)(_shift + delta * RaySpeed) % 1.0f;
+            }
+            else
+            {
+                ClosestNode = null;
+            }
         }
 
         _spriteMaterial.SetShaderParameter("ray_length", spriteScale);

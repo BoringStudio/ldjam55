@@ -17,31 +17,42 @@ public partial class Inventory : Node
     public override void _Ready()
     {
         foreach (var item in InitialItems)
-        {
-            var index = -1;
-            for (var i = 0; i < Items.Count; i++)
-            {
-                if (Items[i].Item.GlobalId != item.GlobalId) continue;
-                index = i;
-                break;
-            }
-
-            if (index >= 0)
-            {
-                Items[index].Count += 1;
-            }
-            else
-            {
-                Items.Add(new resources.ItemInstance
-                {
-                    Count = 1,
-                    Item = item
-                });
-            }
-        }
+            AddItem(item);
     }
 
     public override void _Process(double delta)
     {
+    }
+
+    public void AddItems(IEnumerable<resources.Item> items)
+    {
+        foreach (var item in items)
+            AddItem(item);
+
+        EmitSignal(SignalName.ItemsChanged);
+    }
+
+    private void AddItem(resources.Item item)
+    {
+        var index = -1;
+        for (var i = 0; i < Items.Count; i++)
+        {
+            if (Items[i].Item.GlobalId != item.GlobalId) continue;
+            index = i;
+            break;
+        }
+
+        if (index >= 0)
+        {
+            Items[index].Count += 1;
+        }
+        else
+        {
+            Items.Add(new resources.ItemInstance
+            {
+                Count = 1,
+                Item = item
+            });
+        }
     }
 }

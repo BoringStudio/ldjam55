@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using Godot;
 using Godot.Collections;
@@ -11,6 +12,11 @@ public partial class Game : Node
     [Export] public Inventory Inventory;
 
     [Export] public Array<resources.Monster> AllMonsters;
+
+    private readonly HashSet<int> _summonedMonsters = new();
+
+    [Signal]
+    public delegate void MonsterSummonedEventHandler(resources.Monster monster);
 
     public override void _Ready()
     {
@@ -28,5 +34,12 @@ public partial class Game : Node
     {
         if (what != NotificationDragEnd) return;
         Room.PlaceCurrentObject();
+    }
+
+    public void SummonMonster(resources.Monster monster)
+    {
+        if (!_summonedMonsters.Add(monster.MonsterId)) return;
+        Inventory.AddItems(monster.GivesItems);
+        EmitSignal(SignalName.MonsterSummoned, monster);
     }
 }

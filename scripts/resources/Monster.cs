@@ -11,5 +11,6 @@ public partial class Monster : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] public Texture2D BookImage;
     [Export] public Texture2D RealImage;
+    [Export] public Array<QuestItem> GivesItems;
     [Export] public Array<Vector2I> Diagram;
 }

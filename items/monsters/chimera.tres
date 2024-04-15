@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Monster" load_steps=4 format=3 uid="uid://cmjmyq3ccev2a"]
+[gd_resource type="Resource" script_class="Monster" load_steps=5 format=3 uid="uid://cmjmyq3ccev2a"]
 
 [ext_resource type="Script" path="res://scripts/resources/Monster.cs" id="1_areiu"]
 [ext_resource type="Texture2D" uid="uid://d4hvn8j5i3mi5" path="res://textures/monsters/chimera_print.png" id="1_vxwd8"]
 [ext_resource type="Texture2D" uid="uid://cpw6d4lfs12bk" path="res://textures/monsters/chimera.png" id="2_evpua"]
+[ext_resource type="Resource" uid="uid://c5bexvtfru3fp" path="res://items/quest/notes.tres" id="2_f70hd"]
 
 [resource]
 script = ExtResource("1_areiu")
@@ -11,4 +12,5 @@ Name = "Chimera"
 Description = ""
 BookImage = ExtResource("1_vxwd8")
 RealImage = ExtResource("2_evpua")
+GivesItems = Array[Object]([ExtResource("2_f70hd")])
 Diagram = Array[Vector2i]([Vector2i(5, -90), Vector2i(1001, -90), Vector2i(7, -150), Vector2i(7, -30), Vector2i(1001, 45), Vector2i(10, -15), Vector2i(5, 105), Vector2i(1001, 135), Vector2i(10, -165), Vector2i(5, 75)])

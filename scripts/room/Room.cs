@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -20,11 +21,18 @@ public partial class Room : Node3D
     private Window _window;
     private Camera3D _camera;
     private ItemDrag _lastItemDrag;
+    private ZooMap _zooMap;
+    private Node3D _summoningArea;
 
     public override void _Ready()
     {
         _window = GetTree().Root;
         _camera = GetViewport().GetCamera3D();
+        _zooMap = (ZooMap)GetNode("map");
+        _summoningArea = (Node3D)GetNode("area");
+
+        Debug.Assert(Game != null);
+        Game.MonsterSummoned += OnNewMonster;
     }
 
     public override void _Process(double delta)
@@ -121,7 +129,7 @@ public partial class Room : Node3D
         {
             if (!itemInViewport)
             {
-                RemoveChild(GrabbedObject);
+                _summoningArea.RemoveChild(GrabbedObject);
                 GrabbedObject.QueueFree();
             }
 
@@ -193,25 +201,36 @@ public partial class Room : Node3D
                 roomItem.GetNode<Sprite3D>("sprite").Texture = item.Texture;
         }
 
-        AddChild(GrabbedObject);
+        _summoningArea.AddChild(GrabbedObject);
     }
 
     private void RemoveCurrentItemPreview()
     {
         if (GrabbedObject == null) return;
-        RemoveChild(GrabbedObject);
+        _summoningArea.RemoveChild(GrabbedObject);
         GrabbedObject.QueueFree();
         GrabbedObject = null;
     }
 
+    private void ClearSummoningArea()
+    {
+        GrabbedObject = null;
+
+        foreach (var child in _summoningArea.GetChildren())
+        {
+            _summoningArea.RemoveChild(child);
+            child.QueueFree();
+        }
+    }
+
     private void TrySummon()
     {
-        var children = GetChildren();
+        var children = _summoningArea.GetChildren();
 
         var visited = new System.Collections.Generic.Dictionary<int, GraphNode>();
         var stack = new Stack<(RoomItem, GraphNode, int)>();
 
-        GraphNode start = null;
+        var startingCrystals = new List<GraphNode>();
         foreach (var child in children)
         {
             if (child is not RoomItem roomItem) continue;
@@ -245,7 +264,7 @@ public partial class Room : Node3D
 
                             if (crystal.Directions == CrystalDirections.I)
                             {
-                                start = edge;
+                                startingCrystals.Add(edge);
                             }
 
                             foreach (var ray in last.Rays)
@@ -290,7 +309,7 @@ public partial class Room : Node3D
             }
         }
 
-        if (start != null)
+        foreach (var start in startingCrystals)
         {
             start.Normalize();
             start.Print();
@@ -299,11 +318,16 @@ public partial class Room : Node3D
             {
                 if (start.Compare(monster.Diagram))
                 {
-                    GD.Print("FOUND: ", monster.Name);
-                    break;
+                    Game.SummonMonster(monster);
+                    return;
                 }
             }
         }
+    }
+
+    private void OnNewMonster(Monster monster)
+    {
+        _zooMap.ShowMonster(monster);
     }
 
     private int InvertAngle(int angle)

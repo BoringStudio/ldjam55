@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="Monster" load_steps=4 format=3 uid="uid://d2mcy6hgej0vv"]
+[gd_resource type="Resource" script_class="Monster" load_steps=6 format=3 uid="uid://d2mcy6hgej0vv"]
 
 [ext_resource type="Texture2D" uid="uid://db0ci00cavevg" path="res://textures/monsters/griffin_print.png" id="1_4e532"]
 [ext_resource type="Script" path="res://scripts/resources/Monster.cs" id="1_5vcs8"]
 [ext_resource type="Texture2D" uid="uid://cja3cink5pyol" path="res://textures/monsters/griffin.png" id="2_bn1s2"]
+[ext_resource type="Resource" uid="uid://cuekcxbkesevt" path="res://items/quest/stone.tres" id="2_tsvix"]
+[ext_resource type="Resource" uid="uid://baybq5lf4im32" path="res://items/quest/comb.tres" id="3_do5q2"]
 
 [resource]
 script = ExtResource("1_5vcs8")
@@ -11,4 +13,5 @@ Name = "Griffin"
 Description = ""
 BookImage = ExtResource("1_4e532")
 RealImage = ExtResource("2_bn1s2")
+GivesItems = Array[Object]([ExtResource("2_tsvix"), ExtResource("3_do5q2")])
 Diagram = Array[Vector2i]([Vector2i(1000, 90), Vector2i(10, 0), Vector2i(1000, 90), Vector2i(1000, -135), Vector2i(1000, -135), Vector2i(1, -90), Vector2i(1000, 90), Vector2i(2, 90), Vector2i(1, 180), Vector2i(1, 180), Vector2i(10, 0), Vector2i(2, 90)])

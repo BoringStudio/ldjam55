@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Monster" load_steps=4 format=3 uid="uid://ktmoujvyaf2e"]
+[gd_resource type="Resource" script_class="Monster" load_steps=5 format=3 uid="uid://ktmoujvyaf2e"]
 
 [ext_resource type="Texture2D" uid="uid://ixq1hwrrqce3" path="res://textures/monsters/donkey_print.png" id="1_0fdsl"]
 [ext_resource type="Script" path="res://scripts/resources/Monster.cs" id="1_8r1yb"]
+[ext_resource type="Resource" uid="uid://ctex6vnuph727" path="res://items/quest/gold.tres" id="2_hhcpd"]
 [ext_resource type="Texture2D" uid="uid://bgt2uhlrrmq26" path="res://textures/monsters/donkey.png" id="2_rya2p"]
 
 [resource]
@@ -12,4 +13,5 @@ Description = "A strange donkey who at one time walked half the world.
 However, he never reached the end of the journey because he had worn out all his shoes."
 BookImage = ExtResource("1_0fdsl")
 RealImage = ExtResource("2_rya2p")
+GivesItems = Array[Object]([ExtResource("2_hhcpd")])
 Diagram = Array[Vector2i]([Vector2i(0, 180), Vector2i(1001, -60), Vector2i(4, -120), Vector2i(0, 0), Vector2i(1001, 60), Vector2i(4, 0), Vector2i(0, 120), Vector2i(1001, 180), Vector2i(4, 120)])

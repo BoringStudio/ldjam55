@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Monster" load_steps=4 format=3 uid="uid://b3l3lofsg5u75"]
+[gd_resource type="Resource" script_class="Monster" load_steps=5 format=3 uid="uid://b3l3lofsg5u75"]
 
 [ext_resource type="Texture2D" uid="uid://ddyirbs3dvm1b" path="res://textures/monsters/basilisk_print.png" id="1_r0yp5"]
 [ext_resource type="Script" path="res://scripts/resources/Monster.cs" id="1_xpx62"]
+[ext_resource type="Resource" uid="uid://qi6u8jxlw5s5" path="res://items/quest/pants.tres" id="2_he778"]
 [ext_resource type="Texture2D" uid="uid://44fey7sctmr8" path="res://textures/monsters/basilisk.png" id="2_nr4mc"]
 
 [resource]
@@ -11,4 +12,5 @@ Name = "Basilisk"
 Description = ""
 BookImage = ExtResource("1_r0yp5")
 RealImage = ExtResource("2_nr4mc")
+GivesItems = Array[Object]([ExtResource("2_he778")])
 Diagram = Array[Vector2i]([Vector2i(1000, 180), Vector2i(1, -90), Vector2i(1000, -135), Vector2i(4, -135), Vector2i(4, -45), Vector2i(1, 135), Vector2i(1000, 45), Vector2i(1, 45), Vector2i(1, 135)])

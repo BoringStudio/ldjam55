@@ -1,7 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl5eskwaaf5mj"]
+[gd_scene load_steps=27 format=3 uid="uid://cl5eskwaaf5mj"]
 
 [ext_resource type="Script" path="res://scripts/room/Room.cs" id="1_a1o5u"]
+[ext_resource type="Texture2D" uid="uid://ca4i0a3kv72sm" path="res://textures/ui/zoo_map.png" id="3_7o6c1"]
+[ext_resource type="Script" path="res://scripts/room/ZooMap.cs" id="4_ffh3j"]
+[ext_resource type="Texture2D" uid="uid://c1opvpfv65uvv" path="res://textures/ui/map/yeti_map.png" id="4_fghlc"]
 [ext_resource type="Environment" uid="uid://bfb6td7o7va37" path="res://room_env.tres" id="4_tm6k3"]
+[ext_resource type="Texture2D" uid="uid://bvs1x832iit0s" path="res://textures/ui/map/chimera_map.png" id="5_bcgv3"]
+[ext_resource type="Texture2D" uid="uid://bmwh70s3shp80" path="res://textures/ui/map/mermaid_map.png" id="6_alpqu"]
+[ext_resource type="Script" path="res://scripts/room/ZooMapItem.cs" id="6_gckjm"]
+[ext_resource type="Texture2D" uid="uid://ck6ngwac4rfgj" path="res://textures/ui/map/bat_map.png" id="7_d6vk0"]
+[ext_resource type="Resource" uid="uid://cg8ddseh35mv6" path="res://items/monsters/yeti.tres" id="7_q6v4h"]
+[ext_resource type="Texture2D" uid="uid://b8lfwuwrcolvn" path="res://textures/ui/map/pig_map.png" id="8_sncjy"]
+[ext_resource type="Resource" uid="uid://cmjmyq3ccev2a" path="res://items/monsters/chimera.tres" id="9_3ia05"]
+[ext_resource type="Texture2D" uid="uid://cid474c5xuhoq" path="res://textures/ui/map/dragon_map.png" id="9_dlb41"]
+[ext_resource type="Texture2D" uid="uid://cetuy6mune8nc" path="res://textures/ui/map/basilisk_map.png" id="10_q613b"]
+[ext_resource type="Resource" uid="uid://bdwj6xexe50ue" path="res://items/monsters/mermaid.tres" id="11_5wyut"]
+[ext_resource type="Texture2D" uid="uid://cqatvsamxuda1" path="res://textures/ui/map/griffin_map.png" id="11_wauaf"]
+[ext_resource type="Texture2D" uid="uid://dv5e5cthuuqy3" path="res://textures/ui/map/lochness_map.png" id="12_luysx"]
+[ext_resource type="Texture2D" uid="uid://rmwvquj2y43w" path="res://textures/ui/map/donkey_map.png" id="13_7jgkd"]
+[ext_resource type="Resource" uid="uid://bw5yhkwpviri6" path="res://items/monsters/bat.tres" id="13_vxbo7"]
+[ext_resource type="Resource" uid="uid://bhpx5hg7faiwq" path="res://items/monsters/pig.tres" id="15_twcre"]
+[ext_resource type="Resource" uid="uid://bv31r1ryekl20" path="res://items/monsters/dragon.tres" id="17_dr460"]
+[ext_resource type="Resource" uid="uid://b3l3lofsg5u75" path="res://items/monsters/basilisk.tres" id="19_yn75c"]
+[ext_resource type="Resource" uid="uid://d2mcy6hgej0vv" path="res://items/monsters/griffin.tres" id="21_u65ft"]
+[ext_resource type="Resource" uid="uid://chiohhxja23us" path="res://items/monsters/lochness.tres" id="23_ief1j"]
+[ext_resource type="Resource" uid="uid://ktmoujvyaf2e" path="res://items/monsters/donkey.tres" id="25_7sx57"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2sja0"]
 
@@ -20,3 +43,82 @@ far = 100.0
 visible = false
 mesh = SubResource("PlaneMesh_2sja0")
 skeleton = NodePath("../..")
+
+[node name="area" type="Node3D" parent="."]
+
+[node name="map" type="Sprite3D" parent="."]
+transform = Transform3D(0.998401, -0.056536, 0, 0.056536, 0.998401, 0, 0, 0, 1, -0.536032, 0.912827, -1.18431)
+sorting_offset = -1.0
+pixel_size = 0.0013
+texture = ExtResource("3_7o6c1")
+script = ExtResource("4_ffh3j")
+
+[node name="yeti" type="Sprite3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0812578, 0.240498, 0.02)
+pixel_size = 0.0013
+texture = ExtResource("4_fghlc")
+script = ExtResource("6_gckjm")
+Monster = ExtResource("7_q6v4h")
+
+[node name="chimera" type="Sprite3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0762481, 0.198491, 0.02)
+pixel_size = 0.0013
+texture = ExtResource("5_bcgv3")
+script = ExtResource("6_gckjm")
+Monster = ExtResource("9_3ia05")
+
+[node name="mermaid" type="Sprite3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.255677, 0.128806, 0.017463)
+pixel_size = 0.0013
+texture = ExtResource("6_alpqu")
+script = ExtResource("6_gckjm")
+Monster = ExtResource("11_5wyut")
+
+[node name="bat" type="Sprite3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.133931, 0.102294, 0.02)
+pixel_size = 0.0013
+texture = ExtResource("7_d6vk0")
+script = ExtResource("6_gckjm")
+Monster = ExtResource("13_vxbo7")
+
+[node name="pig" type="Sprite3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.345646, 0.0371494, 0.02)
+pixel_size = 0.0013
+texture = ExtResource("8_sncjy")
+script = ExtResource("6_gckjm")
+Monster = ExtResource("15_twcre")
+
+[node name="dragon" type="Sprite3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.322184, 0.153272, 0.0366796)
+pixel_size = 0.0013
+texture = ExtResource("9_dlb41")
+script = ExtResource("6_gckjm")
+Monster = ExtResource("17_dr460")
+
+[node name="basilisk" type="Sprite3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.187699, 0.111769, 0.0213095)
+pixel_size = 0.0013
+texture = ExtResource("10_q613b")
+script = ExtResource("6_gckjm")
+Monster = ExtResource("19_yn75c")
+
+[node name="griffin" type="Sprite3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.205384, 0.00279099, 0.0366796)
+pixel_size = 0.0013
+texture = ExtResource("11_wauaf")
+script = ExtResource("6_gckjm")
+Monster = ExtResource("21_u65ft")
+
+[node name="lochness" type="Sprite3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0287317, 0.0392472, 0.0366796)
+pixel_size = 0.0013
+texture = ExtResource("12_luysx")
+script = ExtResource("6_gckjm")
+Monster = ExtResource("23_ief1j")
+
+[node name="donkey" type="Sprite3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.117959, -0.0790329, 0.0366796)
+pixel_size = 0.0013
+texture = ExtResource("13_7jgkd")
+script = ExtResource("6_gckjm")
+Monster = ExtResource("25_7sx57")

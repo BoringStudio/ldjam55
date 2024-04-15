@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Monster" load_steps=4 format=3 uid="uid://bw5yhkwpviri6"]
+[gd_resource type="Resource" script_class="Monster" load_steps=5 format=3 uid="uid://bw5yhkwpviri6"]
 
 [ext_resource type="Texture2D" uid="uid://dktobcbfs558d" path="res://textures/monsters/bat_print.png" id="1_8qwxa"]
 [ext_resource type="Script" path="res://scripts/resources/Monster.cs" id="1_umhij"]
 [ext_resource type="Texture2D" uid="uid://ble60ttjhtqvq" path="res://textures/monsters/bat.png" id="2_j0h8r"]
+[ext_resource type="Resource" uid="uid://butn1m4y2483q" path="res://items/quest/abacus.tres" id="2_w1edq"]
 
 [resource]
 script = ExtResource("1_umhij")
@@ -11,4 +12,5 @@ Name = "Bat"
 Description = ""
 BookImage = ExtResource("1_8qwxa")
 RealImage = ExtResource("2_j0h8r")
+GivesItems = Array[Object]([ExtResource("2_w1edq")])
 Diagram = Array[Vector2i]([Vector2i(1001, -120), Vector2i(1000, -60), Vector2i(14, -90), Vector2i(14, 0), Vector2i(1001, 60), Vector2i(11, 0), Vector2i(2, 90), Vector2i(14, 180), Vector2i(11, 180)])

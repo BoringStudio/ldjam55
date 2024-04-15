@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Monster" load_steps=4 format=3 uid="uid://bhpx5hg7faiwq"]
+[gd_resource type="Resource" script_class="Monster" load_steps=5 format=3 uid="uid://bhpx5hg7faiwq"]
 
 [ext_resource type="Script" path="res://scripts/resources/Monster.cs" id="1_1ojyw"]
 [ext_resource type="Texture2D" uid="uid://id2hncm6f84v" path="res://textures/monsters/pig_book.png" id="1_laiax"]
 [ext_resource type="Texture2D" uid="uid://bfkjer6oas11v" path="res://textures/monsters/pig.png" id="2_bowrd"]
+[ext_resource type="Resource" uid="uid://d4bhlmesxi2ci" path="res://items/quest/feather.tres" id="2_ol2sx"]
 
 [resource]
 script = ExtResource("1_1ojyw")
@@ -11,4 +12,5 @@ Name = "Bob"
 Description = "Some flying pig"
 BookImage = ExtResource("1_laiax")
 RealImage = ExtResource("2_bowrd")
+GivesItems = Array[Object]([ExtResource("2_ol2sx")])
 Diagram = Array[Vector2i]([Vector2i(4, 180), Vector2i(1001, -90), Vector2i(6, -150), Vector2i(6, -30), Vector2i(1001, 90), Vector2i(2, 30), Vector2i(2, 150)])
