@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c7guiqvhdmjsu"]
+[gd_scene load_steps=47 format=3 uid="uid://c7guiqvhdmjsu"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_uc7et"]
 [ext_resource type="Resource" uid="uid://ktmoujvyaf2e" path="res://items/monsters/donkey.tres" id="2_56jnr"]
@@ -6,23 +6,45 @@
 [ext_resource type="PackedScene" uid="uid://c8ltkgk4of5g" path="res://prefabs/inventory_item.tscn" id="3_dwvwn"]
 [ext_resource type="Script" path="res://scripts/Inventory.cs" id="3_kj427"]
 [ext_resource type="Texture2D" uid="uid://b6u8w6env0y2r" path="res://textures/ui/patern.png" id="3_nkgwj"]
+[ext_resource type="Resource" uid="uid://bhpx5hg7faiwq" path="res://items/monsters/pig.tres" id="3_yllff"]
 [ext_resource type="Resource" uid="uid://d1fbehf3ysehk" path="res://items/crystals/blue_crystal.tres" id="4_2himg"]
 [ext_resource type="Texture2D" uid="uid://dfmmtetisyyfw" path="res://textures/ui/book.png" id="4_4w1lm"]
 [ext_resource type="PackedScene" uid="uid://cl5eskwaaf5mj" path="res://prefabs/room.tscn" id="4_a3vi0"]
 [ext_resource type="Theme" uid="uid://cmw6buwn7cjqw" path="res://theme.tres" id="4_msmoe"]
+[ext_resource type="Resource" uid="uid://b3l3lofsg5u75" path="res://items/monsters/basilisk.tres" id="4_rad25"]
+[ext_resource type="Resource" uid="uid://d2mcy6hgej0vv" path="res://items/monsters/griffin.tres" id="5_4kmd8"]
 [ext_resource type="Resource" uid="uid://bfr3n747jb8rx" path="res://items/crystals/green_crystal.tres" id="5_bebhw"]
 [ext_resource type="Resource" uid="uid://cp4qyfnhkjpm" path="res://items/quest/boots.tres" id="6_2vjsh"]
+[ext_resource type="Resource" uid="uid://bdwj6xexe50ue" path="res://items/monsters/mermaid.tres" id="6_tc561"]
+[ext_resource type="Resource" uid="uid://cmjmyq3ccev2a" path="res://items/monsters/chimera.tres" id="7_e4gvx"]
 [ext_resource type="PackedScene" uid="uid://bpdnflnh0b7io" path="res://prefabs/inventory_ui.tscn" id="7_iojk6"]
 [ext_resource type="Resource" uid="uid://d4bhlmesxi2ci" path="res://items/quest/feather.tres" id="7_qslus"]
 [ext_resource type="Texture2D" uid="uid://xo47w0hx132j" path="res://textures/ui/room_background.png" id="8_ctnqd"]
+[ext_resource type="Resource" uid="uid://bw5yhkwpviri6" path="res://items/monsters/bat.tres" id="8_m13gy"]
 [ext_resource type="Resource" uid="uid://ctex6vnuph727" path="res://items/quest/gold.tres" id="8_t4okx"]
+[ext_resource type="Resource" uid="uid://chiohhxja23us" path="res://items/monsters/lochness.tres" id="9_70u2f"]
 [ext_resource type="Resource" uid="uid://fhl0ky2x45vo" path="res://items/crystals/purple_crystal.tres" id="9_gsl15"]
+[ext_resource type="Resource" uid="uid://cg8ddseh35mv6" path="res://items/monsters/yeti.tres" id="10_kdvsp"]
+[ext_resource type="Resource" uid="uid://bwatfpiximxs3" path="res://items/quest/fish.tres" id="11_auclt"]
+[ext_resource type="Resource" uid="uid://bv31r1ryekl20" path="res://items/monsters/dragon.tres" id="11_pe6yt"]
 [ext_resource type="Texture2D" uid="uid://b7bp86dwi1qhn" path="res://textures/ui/book_arrow.png" id="11_pyagv"]
+[ext_resource type="Resource" uid="uid://d04mr5jjtiucu" path="res://items/quest/seeds.tres" id="12_3pu37"]
+[ext_resource type="Resource" uid="uid://cuekcxbkesevt" path="res://items/quest/stone.tres" id="13_agpc7"]
 [ext_resource type="Texture2D" uid="uid://ixq1hwrrqce3" path="res://textures/monsters/donkey_print.png" id="13_bvh2i"]
 [ext_resource type="FontFile" uid="uid://bnk7pq7rtseu1" path="res://fonts/font_book.otf" id="13_jaq5h"]
 [ext_resource type="Texture2D" uid="uid://dgwdvrduo2pws" path="res://textures/ui/border_small.png" id="13_lnxmd"]
+[ext_resource type="Resource" uid="uid://cv2qelt8ia4li" path="res://items/quest/hat.tres" id="14_bv28r"]
 [ext_resource type="Texture2D" uid="uid://bb58wyknhge23" path="res://textures/diagrams/donkey_diagram.png" id="15_5jgyp"]
+[ext_resource type="Resource" uid="uid://b2ug13u8ehdbw" path="res://items/quest/mirror.tres" id="15_qi4cb"]
+[ext_resource type="Resource" uid="uid://cb6x7cexa8vc" path="res://items/quest/bone.tres" id="16_amfgk"]
+[ext_resource type="Resource" uid="uid://baybq5lf4im32" path="res://items/quest/comb.tres" id="17_snofc"]
+[ext_resource type="Resource" uid="uid://cs1q701l2lnvc" path="res://items/quest/file.tres" id="18_mrj7k"]
+[ext_resource type="Resource" uid="uid://dii8860np6rka" path="res://items/quest/flute.tres" id="19_ma0jt"]
+[ext_resource type="Resource" uid="uid://qi6u8jxlw5s5" path="res://items/quest/pants.tres" id="20_5fr3x"]
+[ext_resource type="Resource" uid="uid://butn1m4y2483q" path="res://items/quest/abacus.tres" id="21_42j8o"]
 [ext_resource type="Script" path="res://scripts/ui/RoomViewport.cs" id="22_7p3vq"]
+[ext_resource type="Resource" uid="uid://c5bexvtfru3fp" path="res://items/quest/notes.tres" id="22_cadkt"]
+[ext_resource type="PackedScene" uid="uid://5jteqv4nlkem" path="res://prefabs/items/quest_item.tscn" id="24_rtbbl"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ndo7s"]
 viewport_path = NodePath("room_world")
@@ -32,7 +54,7 @@ position = Vector2(-1, 0)
 script = ExtResource("1_uc7et")
 Room = NodePath("room_world/room")
 Inventory = NodePath("inventory")
-AllMonsters = Array[Object]([ExtResource("2_56jnr")])
+AllMonsters = Array[Object]([ExtResource("2_56jnr"), ExtResource("3_yllff"), ExtResource("4_rad25"), ExtResource("5_4kmd8"), ExtResource("6_tc561"), ExtResource("7_e4gvx"), ExtResource("8_m13gy"), ExtResource("9_70u2f"), ExtResource("10_kdvsp"), ExtResource("11_pe6yt")])
 
 [node name="force_window_aspect" type="Node" parent="."]
 script = ExtResource("2_uk7lg")
@@ -40,7 +62,7 @@ script = ExtResource("2_uk7lg")
 [node name="inventory" type="Node" parent="."]
 script = ExtResource("3_kj427")
 Balance = 100
-InitialItems = Array[Object]([ExtResource("4_2himg"), ExtResource("5_bebhw"), ExtResource("6_2vjsh"), ExtResource("7_qslus"), ExtResource("8_t4okx"), ExtResource("9_gsl15")])
+InitialItems = Array[Object]([ExtResource("9_gsl15"), ExtResource("5_bebhw"), ExtResource("4_2himg"), ExtResource("6_2vjsh"), ExtResource("7_qslus"), ExtResource("8_t4okx"), ExtResource("11_auclt"), ExtResource("12_3pu37"), ExtResource("13_agpc7"), ExtResource("14_bv28r"), ExtResource("15_qi4cb"), ExtResource("16_amfgk"), ExtResource("17_snofc"), ExtResource("18_mrj7k"), ExtResource("19_ma0jt"), ExtResource("20_5fr3x"), ExtResource("21_42j8o"), ExtResource("22_cadkt")])
 
 [node name="room_world" type="SubViewport" parent="."]
 transparent_bg = true
@@ -50,6 +72,7 @@ size = Vector2i(2048, 2048)
 render_target_update_mode = 4
 
 [node name="room" parent="room_world" node_paths=PackedStringArray("RenderTarget") instance=ExtResource("4_a3vi0")]
+QuestItem = ExtResource("24_rtbbl")
 RenderTarget = NodePath("../../main_canvas/container/home_right/room_viewport")
 
 [node name="main_canvas" type="CanvasLayer" parent="."]
@@ -245,7 +268,6 @@ flip_h = true
 
 [node name="inventory_ui" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left" node_paths=PackedStringArray("Inventory") instance=ExtResource("7_iojk6")]
 layout_mode = 2
-size_flags_vertical = 3
 Inventory = NodePath("../../../../../../inventory")
 InventoryItemScene = ExtResource("3_dwvwn")
 

@@ -14,6 +14,8 @@ public partial class Game : Node
 
     public override void _Ready()
     {
+        GetTree().Root.MinSize = new Vector2I(1280, 768);
+
         Debug.Assert(Inventory != null);
         Room.Game = this;
     }

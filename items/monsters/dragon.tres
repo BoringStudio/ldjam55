@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Monster" load_steps=4 format=3 uid="uid://bv31r1ryekl20"]
+
+[ext_resource type="Texture2D" uid="uid://bd4c0ldte5h40" path="res://textures/monsters/dragon_print.png" id="1_4xyeh"]
+[ext_resource type="Script" path="res://scripts/resources/Monster.cs" id="1_pr57x"]
+[ext_resource type="Texture2D" uid="uid://cne4hlvvj6m1y" path="res://textures/monsters/dragon.png" id="2_gi7fp"]
+
+[resource]
+script = ExtResource("1_pr57x")
+MonsterId = 9
+Name = "Dragon"
+Description = ""
+BookImage = ExtResource("1_4xyeh")
+RealImage = ExtResource("2_gi7fp")
+Diagram = Array[Vector2i]([Vector2i(1000, 0), Vector2i(2, -135), Vector2i(1001, -105), Vector2i(4, -165), Vector2i(4, -45), Vector2i(2, -45), Vector2i(1001, 0), Vector2i(13, -60), Vector2i(13, 60), Vector2i(2, 45), Vector2i(1001, 105), Vector2i(4, 45), Vector2i(4, 165), Vector2i(2, 135)])

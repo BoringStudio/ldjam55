@@ -2,18 +2,14 @@ using Godot;
 
 namespace ldjam55.scripts.ui;
 
-public partial class InventoryUi : Control
+public partial class InventoryUi : HFlowContainer
 {
     [Export] public Inventory Inventory;
 
     [Export] public PackedScene InventoryItemScene;
 
-    private FlowContainer _itemsGrid;
-
     public override void _Ready()
     {
-        _itemsGrid = GetNode<FlowContainer>("items_grid");
-
         Inventory.ItemsChanged += OnInventoryChanged;
         ResetLists();
     }
@@ -29,9 +25,9 @@ public partial class InventoryUi : Control
 
     private void ResetLists()
     {
-        foreach (var child in _itemsGrid.GetChildren())
+        foreach (var child in GetChildren())
         {
-            _itemsGrid.RemoveChild(child);
+            RemoveChild(child);
             child.QueueFree();
         }
 
@@ -41,7 +37,7 @@ public partial class InventoryUi : Control
             item.Inventory = Inventory;
             item.Item = instance.Item;
             item.Count = 1;
-            _itemsGrid.AddChild(item);
+            AddChild(item);
         }
     }
 }

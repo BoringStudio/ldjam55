@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="QuestItem" load_steps=4 format=3 uid="uid://cp4qyfnhkjpm"]
 
 [ext_resource type="Script" path="res://scripts/resources/QuestItem.cs" id="1_1vbch"]
-[ext_resource type="PackedScene" uid="uid://5jteqv4nlkem" path="res://prefabs/items/boots.tscn" id="1_v0bnt"]
-[ext_resource type="Texture2D" uid="uid://ceun8y422qu13" path="res://textures/items/item_boots.png" id="1_ybun2"]
+[ext_resource type="PackedScene" uid="uid://5jteqv4nlkem" path="res://prefabs/items/quest_item.tscn" id="1_v0bnt"]
+[ext_resource type="Texture2D" uid="uid://ceun8y422qu13" path="res://textures/items/boots.png" id="1_ybun2"]
 
 [resource]
 script = ExtResource("1_1vbch")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Monster" load_steps=4 format=3 uid="uid://d2mcy6hgej0vv"]
+
+[ext_resource type="Texture2D" uid="uid://db0ci00cavevg" path="res://textures/monsters/griffin_print.png" id="1_4e532"]
+[ext_resource type="Script" path="res://scripts/resources/Monster.cs" id="1_5vcs8"]
+[ext_resource type="Texture2D" uid="uid://cja3cink5pyol" path="res://textures/monsters/griffin.png" id="2_bn1s2"]
+
+[resource]
+script = ExtResource("1_5vcs8")
+MonsterId = 3
+Name = "Griffin"
+Description = ""
+BookImage = ExtResource("1_4e532")
+RealImage = ExtResource("2_bn1s2")
+Diagram = Array[Vector2i]([Vector2i(1000, 90), Vector2i(10, 0), Vector2i(1000, 90), Vector2i(1000, -135), Vector2i(1000, -135), Vector2i(1, -90), Vector2i(1000, 90), Vector2i(2, 90), Vector2i(1, 180), Vector2i(1, 180), Vector2i(10, 0), Vector2i(2, 90)])

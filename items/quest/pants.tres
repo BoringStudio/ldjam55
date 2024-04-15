@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuestItem" load_steps=3 format=3 uid="uid://qi6u8jxlw5s5"]
+
+[ext_resource type="Script" path="res://scripts/resources/QuestItem.cs" id="1_lgikt"]
+[ext_resource type="Texture2D" uid="uid://bqsx3b5fx1e35" path="res://textures/items/pants.png" id="1_tvbvq"]
+
+[resource]
+script = ExtResource("1_lgikt")
+GlobalId = 12
+Name = "Pants"
+Texture = ExtResource("1_tvbvq")

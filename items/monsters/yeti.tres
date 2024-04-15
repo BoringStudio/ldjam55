@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Monster" load_steps=4 format=3 uid="uid://cg8ddseh35mv6"]
+
+[ext_resource type="Script" path="res://scripts/resources/Monster.cs" id="1_370vw"]
+[ext_resource type="Texture2D" uid="uid://36l4fs6u8mf4" path="res://textures/monsters/yeti_print.png" id="1_t81k1"]
+[ext_resource type="Texture2D" uid="uid://bu1s285bytuap" path="res://textures/monsters/yeti.png" id="2_7ksq3"]
+
+[resource]
+script = ExtResource("1_370vw")
+MonsterId = 8
+Name = "Yeti"
+Description = ""
+BookImage = ExtResource("1_t81k1")
+RealImage = ExtResource("2_7ksq3")
+Diagram = Array[Vector2i]([Vector2i(12, -90), Vector2i(1001, -150), Vector2i(7, -90), Vector2i(7, 150), Vector2i(1001, 30), Vector2i(7, 90), Vector2i(1001, -30), Vector2i(2, -90), Vector2i(2, 30), Vector2i(1001, 150), Vector2i(2, 90)])

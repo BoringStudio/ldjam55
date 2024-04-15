@@ -10,6 +10,7 @@ namespace ldjam55.scripts.room;
 public partial class Room : Node3D
 {
     [Export] public Game Game;
+    [Export] public PackedScene QuestItem;
 
     [Export] public Control RenderTarget;
     [Export] public Vector2 SummoningAreaSize = Vector2.One * 2.0f;
@@ -179,14 +180,19 @@ public partial class Room : Node3D
         return mousePosition;
     }
 
-    private void SetCurrentItemPreview(resources.Item item)
+    private void SetCurrentItemPreview(Item item)
     {
         RemoveCurrentItemPreview();
-        if (item.RoomItem == null) return;
 
-        GrabbedObject = (Node3D)item.RoomItem.Instantiate();
+        var scene = item.RoomItem ?? QuestItem;
+        GrabbedObject = (Node3D)scene.Instantiate();
         if (GrabbedObject is RoomItem roomItem)
+        {
             roomItem.Item = item;
+            if (item.RoomItem == null)
+                roomItem.GetNode<Sprite3D>("sprite").Texture = item.Texture;
+        }
+
         AddChild(GrabbedObject);
     }
 
@@ -294,6 +300,7 @@ public partial class Room : Node3D
                 if (start.Compare(monster.Diagram))
                 {
                     GD.Print("FOUND: ", monster.Name);
+                    break;
                 }
             }
         }

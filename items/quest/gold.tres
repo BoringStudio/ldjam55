@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="QuestItem" load_steps=4 format=3 uid="uid://ctex6vnuph727"]
+[gd_resource type="Resource" script_class="QuestItem" load_steps=3 format=3 uid="uid://ctex6vnuph727"]
 
 [ext_resource type="Script" path="res://scripts/resources/QuestItem.cs" id="1_6l3hy"]
 [ext_resource type="Texture2D" uid="uid://du7bk6t4tm5kw" path="res://textures/items/gold.png" id="1_vekvr"]
-[ext_resource type="PackedScene" uid="uid://dd3rcctgd4h7a" path="res://prefabs/items/gold.tscn" id="1_vl65c"]
 
 [resource]
 script = ExtResource("1_6l3hy")
 GlobalId = 2
 Name = "Gold"
 Texture = ExtResource("1_vekvr")
-RoomItem = ExtResource("1_vl65c")

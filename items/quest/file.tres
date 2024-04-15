@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuestItem" load_steps=3 format=3 uid="uid://cs1q701l2lnvc"]
+
+[ext_resource type="Script" path="res://scripts/resources/QuestItem.cs" id="1_oaews"]
+[ext_resource type="Texture2D" uid="uid://dcej3ph7cbaji" path="res://textures/items/file.png" id="1_xbl1e"]
+
+[resource]
+script = ExtResource("1_oaews")
+GlobalId = 10
+Name = "File"
+Texture = ExtResource("1_xbl1e")

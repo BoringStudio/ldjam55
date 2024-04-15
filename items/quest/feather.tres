@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="QuestItem" load_steps=4 format=3 uid="uid://d4bhlmesxi2ci"]
 
 [ext_resource type="Texture2D" uid="uid://dqp5w4cvn5kml" path="res://textures/items/feather.png" id="1_2vhpj"]
-[ext_resource type="PackedScene" uid="uid://c07vupwnfgsdf" path="res://prefabs/items/feather.tscn" id="1_65ftu"]
 [ext_resource type="Script" path="res://scripts/resources/QuestItem.cs" id="1_xss1a"]
 
 [resource]
@@ -9,4 +8,3 @@ script = ExtResource("1_xss1a")
 GlobalId = 1
 Name = "Feather"
 Texture = ExtResource("1_2vhpj")
-RoomItem = ExtResource("1_65ftu")

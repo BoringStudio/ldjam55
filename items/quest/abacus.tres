@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuestItem" load_steps=3 format=3 uid="uid://butn1m4y2483q"]
+
+[ext_resource type="Texture2D" uid="uid://cjf3gl5ojb8rf" path="res://textures/items/abacus.png" id="1_cn0q0"]
+[ext_resource type="Script" path="res://scripts/resources/QuestItem.cs" id="1_w1c1v"]
+
+[resource]
+script = ExtResource("1_w1c1v")
+GlobalId = 13
+Name = "Abacus"
+Texture = ExtResource("1_cn0q0")

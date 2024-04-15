@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuestItem" load_steps=3 format=3 uid="uid://b2ug13u8ehdbw"]
+
+[ext_resource type="Texture2D" uid="uid://5l8mtxj728t0" path="res://textures/items/mirror.png" id="1_66ulr"]
+[ext_resource type="Script" path="res://scripts/resources/QuestItem.cs" id="1_gi48h"]
+
+[resource]
+script = ExtResource("1_gi48h")
+GlobalId = 7
+Name = "Mirror"
+Texture = ExtResource("1_66ulr")
