@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b6u8w6env0y2r" path="res://textures/ui/patern.png" id="3_nkgwj"]
 [ext_resource type="Resource" uid="uid://bhpx5hg7faiwq" path="res://items/monsters/pig.tres" id="3_yllff"]
 [ext_resource type="Resource" uid="uid://d1fbehf3ysehk" path="res://items/crystals/blue_crystal.tres" id="4_2himg"]
-[ext_resource type="Texture2D" uid="uid://dfmmtetisyyfw" path="res://textures/ui/book.png" id="4_4w1lm"]
+[ext_resource type="Texture2D" uid="uid://dfmmtetisyyfw" path="res://textures/book/book.png" id="4_4w1lm"]
 [ext_resource type="PackedScene" uid="uid://cl5eskwaaf5mj" path="res://prefabs/room.tscn" id="4_a3vi0"]
 [ext_resource type="Theme" uid="uid://cmw6buwn7cjqw" path="res://theme.tres" id="4_msmoe"]
 [ext_resource type="Resource" uid="uid://b3l3lofsg5u75" path="res://items/monsters/basilisk.tres" id="4_rad25"]

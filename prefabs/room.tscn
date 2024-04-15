@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://cl5eskwaaf5mj"]
+[gd_scene load_steps=29 format=3 uid="uid://cl5eskwaaf5mj"]
 
 [ext_resource type="Script" path="res://scripts/room/Room.cs" id="1_a1o5u"]
 [ext_resource type="PackedScene" uid="uid://buai7kmnjqv7l" path="res://prefabs/summoned_monster.tscn" id="2_31jc0"]
 [ext_resource type="Texture2D" uid="uid://ca4i0a3kv72sm" path="res://textures/ui/zoo_map.png" id="3_7o6c1"]
+[ext_resource type="PackedScene" uid="uid://bjbbehfnk7jnb" path="res://prefabs/summoned_nothing.tscn" id="3_wg60t"]
 [ext_resource type="Script" path="res://scripts/room/ZooMap.cs" id="4_ffh3j"]
 [ext_resource type="Texture2D" uid="uid://c1opvpfv65uvv" path="res://textures/ui/map/yeti_map.png" id="4_fghlc"]
 [ext_resource type="Environment" uid="uid://bfb6td7o7va37" path="res://room_env.tres" id="4_tm6k3"]
@@ -32,6 +33,7 @@
 [node name="room" type="Node3D"]
 script = ExtResource("1_a1o5u")
 SummonedMonsterScene = ExtResource("2_31jc0")
+SummonedNothingScene = ExtResource("3_wg60t")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_tm6k3")

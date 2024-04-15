@@ -13,6 +13,7 @@ public partial class Room : Node3D
     [Export] public Game Game;
     [Export] public PackedScene QuestItem;
     [Export] public PackedScene SummonedMonsterScene;
+    [Export] public PackedScene SummonedNothingScene;
 
     [Export] public Control RenderTarget;
     [Export] public Vector2 SummoningAreaSize = Vector2.One * 2.0f;
@@ -227,6 +228,11 @@ public partial class Room : Node3D
 
     private void TrySummon()
     {
+        if (SummonedMonster != null)
+        {
+            return;
+        }
+
         var children = _summoningArea.GetChildren();
 
         var visited = new System.Collections.Generic.Dictionary<int, GraphNode>();
@@ -325,6 +331,8 @@ public partial class Room : Node3D
                 }
             }
         }
+
+        SpawnNothing();
     }
 
     private void SpawnMonster(Monster monster)
@@ -337,9 +345,34 @@ public partial class Room : Node3D
         Game.SummonMonster(monster);
     }
 
+    private void SpawnNothing()
+    {
+        SummonedMonster = (SummonedMonster)SummonedNothingScene.Instantiate();
+        SummonedMonster.AnimationFinished += OnNothingSpawned;
+        AddChild(SummonedMonster);
+    }
+
     private void OnMonsterSpawned()
     {
         ClearSummoningArea();
+        if (SummonedMonster != null)
+        {
+            RemoveChild(SummonedMonster);
+            SummonedMonster.QueueFree();
+        }
+
+        SummonedMonster = null;
+    }
+
+    private void OnNothingSpawned()
+    {
+        if (SummonedMonster != null)
+        {
+            RemoveChild(SummonedMonster);
+            SummonedMonster.QueueFree();
+        }
+
+        SummonedMonster = null;
     }
 
     private void OnNewMonster(Monster monster)

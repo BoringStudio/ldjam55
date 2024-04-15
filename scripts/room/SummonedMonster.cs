@@ -14,7 +14,11 @@ public partial class SummonedMonster : Node3D
 
     public override void _Ready()
     {
-        _sprite = GetNode<Sprite3D>("sprite");
+        if (Monster != null)
+        {
+            _sprite = GetNode<Sprite3D>("sprite");
+            _sprite.Texture = Monster.RealImage;
+        }
 
         _animationPlayer = GetNode<AnimationPlayer>("animation");
         _animationPlayer.Play("summon");
