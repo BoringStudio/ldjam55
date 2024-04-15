@@ -1,0 +1,31 @@
+[gd_scene load_steps=10 format=3 uid="uid://bvjhs8s4sate8"]
+
+[ext_resource type="Theme" uid="uid://cmw6buwn7cjqw" path="res://theme.tres" id="1_4ihu6"]
+[ext_resource type="Texture2D" uid="uid://dfmmtetisyyfw" path="res://textures/book/book.png" id="2_adt1f"]
+[ext_resource type="Script" path="res://scripts/ui/Book.cs" id="3_3de74"]
+[ext_resource type="Texture2D" uid="uid://qvm3nu7ft0k6" path="res://textures/book/book_page_1.png" id="4_0h1q1"]
+[ext_resource type="Texture2D" uid="uid://6qnrk3yub66y" path="res://textures/book/book_page_2.png" id="5_ehocv"]
+[ext_resource type="Texture2D" uid="uid://36gt7aknawgp" path="res://textures/book/book_page_3.png" id="6_stsog"]
+[ext_resource type="Texture2D" uid="uid://kgw1flvrsj0b" path="res://textures/book/book_page_4.png" id="7_o7epb"]
+[ext_resource type="Texture2D" uid="uid://ck1bpwjln2ltu" path="res://textures/book/book_page_5.png" id="8_2dfpi"]
+[ext_resource type="Texture2D" uid="uid://bj4t018mxppcm" path="res://textures/book/book_page_6.png" id="9_yjx2f"]
+
+[node name="book" type="TextureRect"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_4ihu6")
+texture = ExtResource("2_adt1f")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("3_3de74")
+Pages = Array[Texture2D]([ExtResource("4_0h1q1"), ExtResource("5_ehocv"), ExtResource("6_stsog"), ExtResource("7_o7epb"), ExtResource("8_2dfpi"), ExtResource("9_yjx2f")])
+
+[node name="page" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_0h1q1")
+expand_mode = 1

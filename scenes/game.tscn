@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://b6u8w6env0y2r" path="res://textures/ui/patern.png" id="3_nkgwj"]
 [ext_resource type="Resource" uid="uid://bhpx5hg7faiwq" path="res://items/monsters/pig.tres" id="3_yllff"]
 [ext_resource type="Resource" uid="uid://d1fbehf3ysehk" path="res://items/crystals/blue_crystal.tres" id="4_2himg"]
-[ext_resource type="Texture2D" uid="uid://dfmmtetisyyfw" path="res://textures/book/book.png" id="4_4w1lm"]
 [ext_resource type="PackedScene" uid="uid://cl5eskwaaf5mj" path="res://prefabs/room.tscn" id="4_a3vi0"]
 [ext_resource type="Theme" uid="uid://cmw6buwn7cjqw" path="res://theme.tres" id="4_msmoe"]
 [ext_resource type="Resource" uid="uid://b3l3lofsg5u75" path="res://items/monsters/basilisk.tres" id="4_rad25"]
@@ -26,26 +25,32 @@
 [ext_resource type="Resource" uid="uid://bv31r1ryekl20" path="res://items/monsters/dragon.tres" id="11_pe6yt"]
 [ext_resource type="Texture2D" uid="uid://b7bp86dwi1qhn" path="res://textures/ui/book_arrow.png" id="11_pyagv"]
 [ext_resource type="Resource" uid="uid://d04mr5jjtiucu" path="res://items/quest/seeds.tres" id="12_3pu37"]
-[ext_resource type="Texture2D" uid="uid://ixq1hwrrqce3" path="res://textures/monsters/donkey_print.png" id="13_bvh2i"]
-[ext_resource type="FontFile" uid="uid://bnk7pq7rtseu1" path="res://fonts/font_book.otf" id="13_jaq5h"]
+[ext_resource type="AudioStream" uid="uid://cvybjle0eej" path="res://audio/music_0.mp3" id="12_gtj4g"]
+[ext_resource type="AudioStream" uid="uid://dhpgvsnrv35ig" path="res://audio/music_1.mp3" id="13_bupyt"]
 [ext_resource type="Texture2D" uid="uid://dgwdvrduo2pws" path="res://textures/ui/border_small.png" id="13_lnxmd"]
 [ext_resource type="Resource" uid="uid://cv2qelt8ia4li" path="res://items/quest/hat.tres" id="14_bv28r"]
-[ext_resource type="Texture2D" uid="uid://bb58wyknhge23" path="res://textures/diagrams/donkey_diagram.png" id="15_5jgyp"]
 [ext_resource type="Resource" uid="uid://cb6x7cexa8vc" path="res://items/quest/bone.tres" id="16_amfgk"]
 [ext_resource type="Resource" uid="uid://cs1q701l2lnvc" path="res://items/quest/file.tres" id="18_mrj7k"]
 [ext_resource type="Resource" uid="uid://dii8860np6rka" path="res://items/quest/flute.tres" id="19_ma0jt"]
 [ext_resource type="Script" path="res://scripts/ui/RoomViewport.cs" id="22_7p3vq"]
 [ext_resource type="PackedScene" uid="uid://5jteqv4nlkem" path="res://prefabs/items/quest_item.tscn" id="24_rtbbl"]
+[ext_resource type="PackedScene" uid="uid://bvjhs8s4sate8" path="res://prefabs/book.tscn" id="28_xvuwu"]
+[ext_resource type="FontFile" uid="uid://cecmdvnlbk758" path="res://fonts/font_text.otf" id="30_2mtx5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ndo7s"]
 viewport_path = NodePath("room_world")
 
-[node name="game" type="Node2D" node_paths=PackedStringArray("Room", "Inventory")]
+[node name="game" type="Node2D" node_paths=PackedStringArray("Room", "Inventory", "AudioPlayer")]
 position = Vector2(-1, 0)
 script = ExtResource("1_uc7et")
 Room = NodePath("room_world/room")
 Inventory = NodePath("inventory")
+AudioPlayer = NodePath("background_music")
 AllMonsters = Array[Object]([ExtResource("2_56jnr"), ExtResource("3_yllff"), ExtResource("4_rad25"), ExtResource("5_4kmd8"), ExtResource("6_tc561"), ExtResource("7_e4gvx"), ExtResource("8_m13gy"), ExtResource("9_70u2f"), ExtResource("10_kdvsp"), ExtResource("11_pe6yt")])
+Music = Array[AudioStream]([ExtResource("12_gtj4g"), ExtResource("13_bupyt")])
+
+[node name="background_music" type="AudioStreamPlayer" parent="."]
+volume_db = -8.332
 
 [node name="force_window_aspect" type="Node" parent="."]
 script = ExtResource("2_uk7lg")
@@ -137,86 +142,11 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="book" type="TextureRect" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer"]
+[node name="book" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer" node_paths=PackedStringArray("ButtonPrev", "ButtonNext", "PageLabel") instance=ExtResource("28_xvuwu")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("4_msmoe")
-texture = ExtResource("4_4w1lm")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 20.0
-offset_right = -10.0
-offset_bottom = -30.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="top_space" type="Control" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="TextureRect" type="TextureRect" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("13_bvh2i")
-expand_mode = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
-
-[node name="Control" type="Control" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer/HBoxContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer/HBoxContainer/MarginContainer/Control"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 141.0
-grow_horizontal = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.403922, 0.360784, 0.337255, 1)
-theme_override_fonts/font = ExtResource("13_jaq5h")
-text = "   Tomas
-
-A strange donkey who at one time walked half the world. 
-However, he never reached the end of the journey because he had worn out all his shoes.
-"
-vertical_alignment = 3
-autowrap_mode = 2
-justification_flags = 171
-
-[node name="TextureRect" type="TextureRect" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer/HBoxContainer/MarginContainer/Control"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -116.0
-offset_top = -23.0
-offset_right = -19.0
-offset_bottom = 73.0
-grow_horizontal = 0
-texture = ExtResource("15_5jgyp")
-expand_mode = 1
-
-[node name="bottom_space" type="Control" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer/book/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
+ButtonPrev = NodePath("../../right_container/button_book_left")
+ButtonNext = NodePath("../../right_container/button_book_right")
+PageLabel = NodePath("../../right_container/Page")
 
 [node name="right_space" type="Control" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/HBoxContainer"]
 layout_mode = 2
@@ -228,31 +158,57 @@ theme = ExtResource("4_msmoe")
 alignment = 1
 
 [node name="button_book_left" type="Button" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/right_container"]
-custom_minimum_size = Vector2(100, 64)
+custom_minimum_size = Vector2(100, 48)
 layout_mode = 2
 theme = ExtResource("4_msmoe")
 flat = true
 
 [node name="TextureRect" type="TextureRect" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/right_container/button_book_left"]
-layout_mode = 0
-offset_left = -12.0
-offset_right = 116.0
-offset_bottom = 64.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -24.0
+offset_right = 50.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("11_pyagv")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Page" type="Label" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/right_container"]
+custom_minimum_size = Vector2(30, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.188235, 0.117647, 1)
+theme_override_fonts/font = ExtResource("30_2mtx5")
+theme_override_font_sizes/font_size = 20
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="button_book_right" type="Button" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/right_container"]
-custom_minimum_size = Vector2(100, 64)
+custom_minimum_size = Vector2(100, 48)
 layout_mode = 2
 theme = ExtResource("4_msmoe")
 flat = true
 
 [node name="TextureRect" type="TextureRect" parent="main_canvas/container/NinePatchRect/MarginContainer/home_left/book_container/right_container/button_book_right"]
-layout_mode = 0
-offset_left = -12.0
-offset_right = 116.0
-offset_bottom = 64.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -24.0
+offset_right = 50.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("11_pyagv")
 expand_mode = 1
 stretch_mode = 5
@@ -294,3 +250,6 @@ expand_mode = 1
 stretch_mode = 6
 script = ExtResource("22_7p3vq")
 Viewport = NodePath("../../../../room_world/room")
+
+[node name="intro_canvas" type="CanvasLayer" parent="."]
+visible = false
