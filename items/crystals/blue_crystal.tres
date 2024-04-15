@@ -8,6 +8,6 @@
 script = ExtResource("1_an065")
 Directions = 0
 GlobalId = 1000
-Name = "Green Crystal"
+Name = "Blue Crystal"
 Texture = ExtResource("1_h5vpk")
 RoomItem = ExtResource("1_353td")

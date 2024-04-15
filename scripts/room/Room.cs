@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Godot;
+using ldjam55.scripts.resources;
 using ldjam55.scripts.ui;
 
 namespace ldjam55.scripts.room;
@@ -32,7 +34,7 @@ public partial class Room : Node3D
         if (!_window.GuiIsDragging())
         {
             TryGrabObject(windowMousePosition);
-            TryReleaseObject();
+            TryReleaseObject(itemInViewport);
         }
 
         if (GrabbedObject != null)
@@ -40,7 +42,7 @@ public partial class Room : Node3D
             var relativeMousePosition = ConvertMousePosition(windowMousePosition);
             var from = _camera.ProjectRayOrigin(relativeMousePosition);
             var dir = _camera.ProjectRayNormal(relativeMousePosition);
-            var globalPosition = Plane.PlaneXZ.IntersectsRay(from, dir);
+            var globalPosition = Plane.PlaneXZ.IntersectsRay(from - dir * 10.0f, dir);
 
             if (globalPosition == null)
             {
@@ -56,6 +58,13 @@ public partial class Room : Node3D
 
     public override void _UnhandledInput(InputEvent @event)
     {
+        if (@event.IsActionPressed("summon"))
+        {
+            GD.Print("Try Summon");
+            TrySummon();
+            return;
+        }
+
         var steps = 0;
         if (@event.IsActionPressed("rotate_right"))
         {
@@ -101,12 +110,18 @@ public partial class Room : Node3D
         }
     }
 
-    private void TryReleaseObject()
+    private void TryReleaseObject(bool itemInViewport)
     {
         if (GrabbedObject == null || _lastItemDrag != null) return;
 
         if (!Input.IsActionPressed("grab"))
         {
+            if (!itemInViewport)
+            {
+                RemoveChild(GrabbedObject);
+                GrabbedObject.QueueFree();
+            }
+
             GrabbedObject = null;
         }
     }
@@ -168,6 +183,8 @@ public partial class Room : Node3D
         if (item.RoomItem == null) return;
 
         GrabbedObject = (Node3D)item.RoomItem.Instantiate();
+        if (GrabbedObject is RoomItem roomItem)
+            roomItem.Item = item;
         AddChild(GrabbedObject);
     }
 
@@ -177,5 +194,57 @@ public partial class Room : Node3D
         RemoveChild(GrabbedObject);
         GrabbedObject.QueueFree();
         GrabbedObject = null;
+    }
+
+    private void TrySummon()
+    {
+        var children = GetChildren();
+
+        var visited = new HashSet<int>();
+        var stack = new Stack<RoomItem>();
+
+        RoomItem start = null;
+        foreach (var child in children)
+        {
+            if (child is not RoomItem roomItem) continue;
+            if (visited.Contains(roomItem.GetIndex())) continue;
+
+            stack.Clear();
+            stack.Push(roomItem);
+
+            while (stack.Count > 0)
+            {
+                var last = stack.Pop();
+                var lastIndex = last.GetIndex();
+
+                if (!visited.Add(lastIndex)) continue;
+
+                switch (roomItem.Item)
+                {
+                    case Crystal crystal:
+                    {
+                        GD.Print("Found crystal: ", crystal.Name);
+
+                        if (crystal.Directions == CrystalDirections.I)
+                        {
+                            start = roomItem;
+                        }
+
+                        foreach (var ray in roomItem.Rays)
+                        {
+                            if (ray.ClosestNode is not RoomItem nextNode) continue;
+                            stack.Push(nextNode);
+                        }
+
+                        break;
+                    }
+                    case QuestItem item:
+                        GD.Print("Found item: ", item.Name);
+                        break;
+                }
+            }
+        }
+
+        GD.Print("Found start", start);
     }
 }

@@ -7,6 +7,8 @@ public partial class CrystalRay : Node3D
     [Export] public StaticBody3D Crystal;
     [Export] public float RaySpeed = 0.2f;
 
+    public Node3D ClosestNode { get; private set; }
+
     private Sprite3D _sprite;
     private ShaderMaterial _spriteMaterial;
 
@@ -14,7 +16,6 @@ public partial class CrystalRay : Node3D
 
     private Area3D _area;
 
-    private Node3D _closestNode;
     private float _shift;
 
     public override void _Ready()
@@ -36,9 +37,9 @@ public partial class CrystalRay : Node3D
     public override void _Process(double delta)
     {
         var spriteScale = 1.0f;
-        if (_closestNode != null)
+        if (ClosestNode != null)
         {
-            var distanceSquared = _closestNode.GlobalPosition.DistanceSquaredTo(GlobalPosition);
+            var distanceSquared = ClosestNode.GlobalPosition.DistanceSquaredTo(GlobalPosition);
             spriteScale = Mathf.Clamp(distanceSquared / _spriteLengthSquared, 0.0f, 1.0f);
 
             _shift = (float)(_shift + delta * RaySpeed) % 1.0f;
@@ -80,6 +81,6 @@ public partial class CrystalRay : Node3D
             closest = body;
         }
 
-        _closestNode = closest;
+        ClosestNode = closest;
     }
 }
