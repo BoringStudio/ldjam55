@@ -20,7 +20,8 @@ public partial class Cutscene : CanvasLayer
         if (Pages.Count > 0)
             PageRect.Texture = Pages[_currentPage];
 
-        ButtonNext.Pressed += NextPage;
+        if (ButtonNext != null)
+            ButtonNext.Pressed += NextPage;
     }
 
     public override void _Process(double delta)

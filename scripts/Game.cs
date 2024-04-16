@@ -64,6 +64,7 @@ public partial class Game : Node
     {
         if (_summonedMonsters.Count >= AllMonsters.Count)
         {
+            IsRunning = false;
             MainScene.Visible = false;
             Ending.Visible = true;
         }

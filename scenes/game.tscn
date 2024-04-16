@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c7guiqvhdmjsu"]
+[gd_scene load_steps=44 format=3 uid="uid://c7guiqvhdmjsu"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_uc7et"]
 [ext_resource type="Resource" uid="uid://ktmoujvyaf2e" path="res://items/monsters/donkey.tres" id="2_56jnr"]
@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://cvybjle0eej" path="res://audio/music_0.mp3" id="12_gtj4g"]
 [ext_resource type="AudioStream" uid="uid://dhpgvsnrv35ig" path="res://audio/music_1.mp3" id="13_bupyt"]
 [ext_resource type="Texture2D" uid="uid://dgwdvrduo2pws" path="res://textures/ui/border_small.png" id="13_lnxmd"]
+[ext_resource type="AudioStream" uid="uid://c2w2v7oflr6ui" path="res://audio/music_2.mp3" id="14_a7jiw"]
 [ext_resource type="Resource" uid="uid://cv2qelt8ia4li" path="res://items/quest/hat.tres" id="14_bv28r"]
 [ext_resource type="Resource" uid="uid://cb6x7cexa8vc" path="res://items/quest/bone.tres" id="16_amfgk"]
 [ext_resource type="Resource" uid="uid://cs1q701l2lnvc" path="res://items/quest/file.tres" id="18_mrj7k"]
@@ -40,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://byr3mrp3318ya" path="res://textures/intro/wall.png" id="37_jmoo5"]
 [ext_resource type="Texture2D" uid="uid://c74b7cf4ppsd7" path="res://textures/intro/intro_0.png" id="38_j71mi"]
 [ext_resource type="Texture2D" uid="uid://dgqnqtpwscus" path="res://textures/intro/intro_1.png" id="39_tsjij"]
+[ext_resource type="Texture2D" uid="uid://cvr5vmrsmv4jo" path="res://textures/intro/ending_good.png" id="42_msl12"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ndo7s"]
 viewport_path = NodePath("room_world")
@@ -54,7 +56,7 @@ AllMonsters = Array[Object]([ExtResource("2_56jnr"), ExtResource("3_yllff"), Ext
 Intro = NodePath("intro_canvas")
 MainScene = NodePath("main_canvas")
 Ending = NodePath("ending_canvas")
-Music = Array[AudioStream]([ExtResource("12_gtj4g"), ExtResource("13_bupyt")])
+Music = Array[AudioStream]([ExtResource("12_gtj4g"), ExtResource("13_bupyt"), ExtResource("14_a7jiw")])
 
 [node name="background_music" type="AudioStreamPlayer" parent="."]
 volume_db = -8.332
@@ -326,9 +328,9 @@ flip_h = true
 [node name="ending_canvas" type="CanvasLayer" parent="." node_paths=PackedStringArray("ButtonNext", "PageRect")]
 visible = false
 script = ExtResource("37_8f7cy")
-ButtonNext = NodePath("../intro_canvas/MarginContainer/Button")
-PageRect = NodePath("../intro_canvas/container/scene0")
-Pages = Array[Texture2D]([ExtResource("38_j71mi"), ExtResource("39_tsjij")])
+ButtonNext = NodePath("")
+PageRect = NodePath("container/scene0")
+Pages = Array[Texture2D]([ExtResource("42_msl12")])
 
 [node name="background" type="TextureRect" parent="ending_canvas"]
 anchors_preset = 15
@@ -358,32 +360,3 @@ layout_mode = 2
 texture = ExtResource("38_j71mi")
 expand_mode = 1
 stretch_mode = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="ending_canvas"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -128.0
-offset_top = -64.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
-
-[node name="Button" type="Button" parent="ending_canvas/MarginContainer"]
-custom_minimum_size = Vector2(128, 64)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ending_canvas/MarginContainer/Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("11_pyagv")
-expand_mode = 1
-flip_h = true
