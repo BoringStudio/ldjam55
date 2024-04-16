@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bvjhs8s4sate8"]
+[gd_scene load_steps=15 format=3 uid="uid://bvjhs8s4sate8"]
 
 [ext_resource type="Theme" uid="uid://cmw6buwn7cjqw" path="res://theme.tres" id="1_4ihu6"]
 [ext_resource type="Texture2D" uid="uid://dfmmtetisyyfw" path="res://textures/book/book.png" id="2_adt1f"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cdtkkeyjh6kto" path="res://textures/book/book_page_8.png" id="11_ywtjy"]
 [ext_resource type="Texture2D" uid="uid://c88ha822tke03" path="res://textures/book/book_page_9.png" id="12_obynt"]
 [ext_resource type="Texture2D" uid="uid://bimlgu3m0d87b" path="res://textures/book/book_page_10.png" id="13_p000b"]
+[ext_resource type="Texture2D" uid="uid://cxhm068wbdov5" path="res://textures/book/book_page_11.png" id="14_j3pv3"]
 
 [node name="book" type="TextureRect"]
 size_flags_horizontal = 3
@@ -22,7 +23,7 @@ texture = ExtResource("2_adt1f")
 expand_mode = 3
 stretch_mode = 5
 script = ExtResource("3_3de74")
-Pages = Array[Texture2D]([ExtResource("4_0h1q1"), ExtResource("5_ehocv"), ExtResource("6_stsog"), ExtResource("7_o7epb"), ExtResource("8_2dfpi"), ExtResource("9_yjx2f"), ExtResource("10_8u7fm"), ExtResource("11_ywtjy"), ExtResource("12_obynt"), ExtResource("13_p000b")])
+Pages = Array[Texture2D]([ExtResource("4_0h1q1"), ExtResource("5_ehocv"), ExtResource("6_stsog"), ExtResource("7_o7epb"), ExtResource("8_2dfpi"), ExtResource("9_yjx2f"), ExtResource("10_8u7fm"), ExtResource("11_ywtjy"), ExtResource("12_obynt"), ExtResource("13_p000b"), ExtResource("14_j3pv3")])
 
 [node name="page" type="TextureRect" parent="."]
 layout_mode = 1

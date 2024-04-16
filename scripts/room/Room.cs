@@ -364,6 +364,8 @@ public partial class Room : Node3D
         }
 
         SummonedMonster = null;
+
+        Game.CheckVictory();
     }
 
     private void OnNothingSpawned()

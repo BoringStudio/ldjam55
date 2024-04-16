@@ -3,7 +3,7 @@ using Godot.Collections;
 
 namespace ldjam55.scripts.ui;
 
-public partial class Intro : CanvasLayer
+public partial class Cutscene : CanvasLayer
 {
     [Export] public Button ButtonNext;
     [Export] public TextureRect PageRect;

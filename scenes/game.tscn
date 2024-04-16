@@ -36,7 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://5jteqv4nlkem" path="res://prefabs/items/quest_item.tscn" id="24_rtbbl"]
 [ext_resource type="PackedScene" uid="uid://bvjhs8s4sate8" path="res://prefabs/book.tscn" id="28_xvuwu"]
 [ext_resource type="FontFile" uid="uid://cecmdvnlbk758" path="res://fonts/font_text.otf" id="30_2mtx5"]
-[ext_resource type="Script" path="res://scripts/ui/Intro.cs" id="37_8f7cy"]
+[ext_resource type="Script" path="res://scripts/ui/Cutscene.cs" id="37_8f7cy"]
 [ext_resource type="Texture2D" uid="uid://byr3mrp3318ya" path="res://textures/intro/wall.png" id="37_jmoo5"]
 [ext_resource type="Texture2D" uid="uid://c74b7cf4ppsd7" path="res://textures/intro/intro_0.png" id="38_j71mi"]
 [ext_resource type="Texture2D" uid="uid://dgqnqtpwscus" path="res://textures/intro/intro_1.png" id="39_tsjij"]
@@ -44,7 +44,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_ndo7s"]
 viewport_path = NodePath("room_world")
 
-[node name="game" type="Node2D" node_paths=PackedStringArray("Room", "Inventory", "AudioPlayer", "Intro", "MainScene")]
+[node name="game" type="Node2D" node_paths=PackedStringArray("Room", "Inventory", "AudioPlayer", "Intro", "MainScene", "Ending")]
 position = Vector2(-1, 0)
 script = ExtResource("1_uc7et")
 Room = NodePath("room_world/room")
@@ -53,6 +53,7 @@ AudioPlayer = NodePath("background_music")
 AllMonsters = Array[Object]([ExtResource("2_56jnr"), ExtResource("3_yllff"), ExtResource("4_rad25"), ExtResource("5_4kmd8"), ExtResource("6_tc561"), ExtResource("7_e4gvx"), ExtResource("8_m13gy"), ExtResource("9_70u2f"), ExtResource("10_kdvsp"), ExtResource("11_pe6yt")])
 Intro = NodePath("intro_canvas")
 MainScene = NodePath("main_canvas")
+Ending = NodePath("ending_canvas")
 Music = Array[AudioStream]([ExtResource("12_gtj4g"), ExtResource("13_bupyt")])
 
 [node name="background_music" type="AudioStreamPlayer" parent="."]
@@ -79,7 +80,6 @@ QuestItem = ExtResource("24_rtbbl")
 RenderTarget = NodePath("../../main_canvas/container/home_right/room_viewport")
 
 [node name="main_canvas" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="TextureRect" type="TextureRect" parent="main_canvas"]
 z_index = -1
@@ -259,6 +259,7 @@ script = ExtResource("22_7p3vq")
 Viewport = NodePath("../../../../room_world/room")
 
 [node name="intro_canvas" type="CanvasLayer" parent="." node_paths=PackedStringArray("ButtonNext", "PageRect")]
+visible = false
 script = ExtResource("37_8f7cy")
 ButtonNext = NodePath("MarginContainer/Button")
 PageRect = NodePath("container/scene0")
@@ -312,6 +313,71 @@ layout_mode = 2
 flat = true
 
 [node name="TextureRect" type="TextureRect" parent="intro_canvas/MarginContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_pyagv")
+expand_mode = 1
+flip_h = true
+
+[node name="ending_canvas" type="CanvasLayer" parent="." node_paths=PackedStringArray("ButtonNext", "PageRect")]
+visible = false
+script = ExtResource("37_8f7cy")
+ButtonNext = NodePath("../intro_canvas/MarginContainer/Button")
+PageRect = NodePath("../intro_canvas/container/scene0")
+Pages = Array[Texture2D]([ExtResource("38_j71mi"), ExtResource("39_tsjij")])
+
+[node name="background" type="TextureRect" parent="ending_canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("37_jmoo5")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="container" type="MarginContainer" parent="ending_canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="scene0" type="TextureRect" parent="ending_canvas/container"]
+layout_mode = 2
+texture = ExtResource("38_j71mi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="ending_canvas"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Button" type="Button" parent="ending_canvas/MarginContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="ending_canvas/MarginContainer/Button"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

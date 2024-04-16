@@ -15,8 +15,10 @@ public partial class Game : Node
 
     [Export] public Array<resources.Monster> AllMonsters;
 
-    [Export] public Intro Intro;
+    [Export] public Cutscene Intro;
     [Export] public CanvasLayer MainScene;
+    [Export] public Cutscene Ending;
+
     [Export] public Array<AudioStream> Music;
 
     public bool IsRunning;
@@ -41,8 +43,9 @@ public partial class Game : Node
             AudioPlayer.Finished += SetNextMusic;
         }
 
-        MainScene.Visible = false;
         Intro.Visible = true;
+        MainScene.Visible = false;
+        Ending.Visible = false;
 
         Intro.Finished += OnIntroFinished;
     }
@@ -55,6 +58,15 @@ public partial class Game : Node
     {
         if (what != NotificationDragEnd) return;
         Room.PlaceCurrentObject();
+    }
+
+    public void CheckVictory()
+    {
+        if (_summonedMonsters.Count >= AllMonsters.Count)
+        {
+            MainScene.Visible = false;
+            Ending.Visible = true;
+        }
     }
 
     public void SummonMonster(resources.Monster monster)
