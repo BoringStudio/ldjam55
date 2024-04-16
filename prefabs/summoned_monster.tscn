@@ -119,7 +119,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_chk31"]
 resource_name = "summon"
-length = 4.7
+length = 5.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -127,7 +127,7 @@ tracks/0/path = NodePath("sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.9, 1.4, 1.8, 2.2, 2.6, 3, 3.3, 3.7, 4.2, 4.7),
+"times": PackedFloat32Array(0, 0.4, 0.9, 1.4, 1.8, 2.2, 2.6, 3.8, 4.1, 4.4, 4.9, 5.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0.225789, -0.180891), Vector3(-0.0177817, 0.214825, -0.172107), Vector3(0.0020693, 0.22132, -0.177311), Vector3(-0.00764829, 0.202343, -0.162107), Vector3(-0.0141061, 0.222814, -0.178508), Vector3(0.00261294, 0.212495, -0.17024), Vector3(0, 0.225789, -0.180891), Vector3(0, 0.216114, -0.17314), Vector3(0.067327, 0.225442, -0.180613), Vector3(-0.644114, 0.213214, -0.170817), Vector3(-1.66126, 0.231116, -0.185159), Vector3(-2.27277, 0.219131, -0.175557)]
@@ -139,7 +139,7 @@ tracks/1/path = NodePath("sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.6, 3, 3.3, 3.7, 4.2, 4.7),
+"times": PackedFloat32Array(0, 2.6, 3.8, 4.1, 4.4, 4.9, 5.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.675442, 0, -12.5664), Vector3(-0.675443, 0, 0), Vector3(-0.675443, 2.90959e-09, 0.0380831), Vector3(-0.675443, -2.78426e-08, -0.257262), Vector3(-0.675443, 1.08623e-08, 0.288433), Vector3(-0.675443, 3.81871e-08, -0.312746), Vector3(-0.675443, 8.76278e-08, 0.18401)]
@@ -151,7 +151,7 @@ tracks/2/path = NodePath("sprite:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2.6, 3),
+"times": PackedFloat32Array(0, 2.6, 3.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
@@ -211,7 +211,7 @@ tracks/7/path = NodePath("shadow:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 2.6, 3, 3.3, 3.7, 4.2, 4.7),
+"times": PackedFloat32Array(0, 2.6, 3.8, 4.1, 4.4, 4.9, 5.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, -0.012233, 5.3472e-10), Vector3(0, -0.012233, 5.3472e-10), Vector3(0, -0.012233, 5.3472e-10), Vector3(0.06, -0.012, 0), Vector3(-0.52869, -0.012, 0), Vector3(-1.59678, -0.012, 0), Vector3(-2.19288, -0.012, 0)]

@@ -325,10 +325,9 @@ texture = ExtResource("11_pyagv")
 expand_mode = 1
 flip_h = true
 
-[node name="ending_canvas" type="CanvasLayer" parent="." node_paths=PackedStringArray("ButtonNext", "PageRect")]
+[node name="ending_canvas" type="CanvasLayer" parent="." node_paths=PackedStringArray("PageRect")]
 visible = false
 script = ExtResource("37_8f7cy")
-ButtonNext = NodePath("")
 PageRect = NodePath("container/scene0")
 Pages = Array[Texture2D]([ExtResource("42_msl12")])
 
