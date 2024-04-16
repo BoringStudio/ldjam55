@@ -91,9 +91,11 @@ public partial class Room : Node3D
             steps -= 1;
         }
 
-        if (steps != 0 && GrabbedObject is RoomItem roomItem)
+        if (steps != 0)
         {
-            roomItem.RotateInner(steps);
+            var objectToRotate = GrabbedObject ?? FindObjectUnderCursor(_window.GetMousePosition());
+            if (objectToRotate is RoomItem roomItem)
+                roomItem.RotateInner(steps);
         }
     }
 
@@ -112,17 +114,9 @@ public partial class Room : Node3D
 
         if (Input.IsActionPressed("grab"))
         {
-            var mousePosition = ConvertMousePosition(windowMousePosition);
-            var state = GetWorld3D().DirectSpaceState;
-            var from = _camera.ProjectRayOrigin(mousePosition);
-            var to = from + _camera.ProjectRayNormal(mousePosition) * 20.0f;
-            var query = PhysicsRayQueryParameters3D.Create(from, to);
-            var result = state.IntersectRay(query);
-
-            if (result.Count > 0 && result["collider"].Obj is Node3D node)
-            {
-                GrabbedObject = (Node3D)node.GetParent();
-            }
+            var hoveredObject = FindObjectUnderCursor(windowMousePosition);
+            if (hoveredObject != null)
+                GrabbedObject = hoveredObject;
         }
     }
 
@@ -140,6 +134,23 @@ public partial class Room : Node3D
 
             GrabbedObject = null;
         }
+    }
+
+    private Node3D FindObjectUnderCursor(Vector2 windowMousePosition)
+    {
+        var mousePosition = ConvertMousePosition(windowMousePosition);
+        var state = GetWorld3D().DirectSpaceState;
+        var from = _camera.ProjectRayOrigin(mousePosition);
+        var to = from + _camera.ProjectRayNormal(mousePosition) * 20.0f;
+        var query = PhysicsRayQueryParameters3D.Create(from, to);
+        var result = state.IntersectRay(query);
+
+        if (result.Count > 0 && result["collider"].Obj is Node3D node)
+        {
+            return (Node3D)node.GetParent();
+        }
+
+        return null;
     }
 
     private void DrawDragPreview(bool itemInViewport)
