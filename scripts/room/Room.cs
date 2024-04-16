@@ -439,12 +439,16 @@ internal class GraphNode
         }
     }
 
-    public bool Compare(Array<Vector2I> items)
+    public bool Compare(Array<Vector2I> path)
     {
         var visited = new HashSet<int>();
         var queue = new Stack<(GraphNode, GraphNode, int)>();
 
         var pos = 0;
+
+        // Maps group to item
+        var usedItemIds = new HashSet<int>();
+        var foundGroups = new System.Collections.Generic.Dictionary<int, int>();
 
         queue.Push((this, null, 0));
         while (queue.Count > 0)
@@ -452,7 +456,7 @@ internal class GraphNode
             var (last, prev, lastAngle) = queue.Pop();
             if (!visited.Add(last.Index)) continue;
 
-            if (pos >= items.Count)
+            if (pos >= path.Count)
             {
                 GD.Print("Too many");
                 return false;
@@ -463,8 +467,36 @@ internal class GraphNode
                 GD.Print("Node", prev.Index, " -> Node", last.Index, "[label=\"", lastAngle, "\", id=\"",
                     last.Item.GlobalId, "\"]");
 
-                var (expectedId, expectedAngle) = items[pos];
-                if (last.Item.GlobalId != expectedId || expectedAngle != lastAngle) return false;
+                var (expectedGroup, expectedAngle) = path[pos];
+                if (expectedAngle != lastAngle) return false;
+
+                if (expectedGroup >= 1000)
+                {
+                    // Handle crystals
+                    if (last.Item.GlobalId != expectedGroup) return false;
+                }
+                else
+                {
+                    // Handle item groups
+                    if (foundGroups.TryGetValue(expectedGroup, out var expectedGlobalId))
+                    {
+                        if (last.Item.GlobalId != expectedGlobalId)
+                        {
+                            GD.Print("Skip reason: multiple different items in the same group");
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        foundGroups.Add(expectedGroup, last.Item.GlobalId);
+                        if (!usedItemIds.Add(last.Item.GlobalId))
+                        {
+                            GD.Print("Skip reason: same item used in multiple groups");
+                            return false;
+                        }
+                    }
+                }
+
                 pos += 1;
             }
 
@@ -477,7 +509,16 @@ internal class GraphNode
             }
         }
 
-        return pos == items.Count;
+        if (pos != path.Count)
+            return false;
+
+        foreach (var requiredItem in foundGroups.Keys)
+        {
+            if (!usedItemIds.Contains(requiredItem))
+                return false;
+        }
+
+        return true;
     }
 
     public bool AddLink(int angle, GraphNode node)
